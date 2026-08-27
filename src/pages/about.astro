@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import JoinBlock from '../components/JoinBlock.astro';
+import { LINKS } from '../config';
+---
+
+<BaseLayout
+  title="About"
+  path="/about"
+  description="Why I'm building open-source infrastructure for composable ontologies — and who this community is for."
+>
+  <section class="wrap about">
+    <h1>Why this exists.</h1>
+
+    <div class="about__body prose-ish">
+      <p class="lead">
+        Everyone chasing cross-domain intelligence hits the same wall. I hit it
+        myself — a real 16,879-node knowledge graph that collapsed under its own
+        noise.
+      </p>
+      <p class="muted">
+        The wall is structural: every domain is a unique fingerprint, and one
+        schema for all of them destroys what makes each useful. The fix is
+        <strong>data-structure infrastructure</strong> — let each expert model
+        their own domain, then compose the models. It should be
+        <strong>open source</strong>. Too foundational to belong to one vendor.
+      </p>
+
+      <div class="about__who bracket">
+        <span class="bracket-corners"></span>
+        <h3>This is for you if…</h3>
+        <ul class="about__list">
+          <li>You're building knowledge graphs, entity resolution, or "company brain" tooling and feel the monolith pull.</li>
+          <li>You're a domain expert — in medicine, government, ops — who's tired of your team's real model living only in people's heads.</li>
+          <li>You just think this way, and want to argue about where the design breaks.</li>
+        </ul>
+      </div>
+
+      <p class="muted">
+        Come find me on <a href={LINKS.xProfile}>X</a>, join the community, or
+        sign up for the monthly digest below. No funnel — just the front door.
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <hr class="rule" />
+    <div style="height:2.5rem"></div>
+    <JoinBlock />
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    padding-block: clamp(2.5rem, 7vw, 4.5rem) 1rem;
+    max-width: var(--maxw-read);
+  }
+  .about__body p {
+    color: var(--cream-dim);
+  }
+  .about__who {
+    margin: 2rem 0;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .about__who h3 {
+    margin-top: 0;
+  }
+  .about__list {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--cream-dim);
+  }
+  .about__list li {
+    margin-bottom: 0.6rem;
+  }
+</style>

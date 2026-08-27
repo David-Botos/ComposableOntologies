@@ -1,0 +1,70 @@
+---
+import { SITE, LINKS } from '../config';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <hr class="rule" />
+  <div class="wrap footer__inner">
+    <div class="footer__col">
+      <div class="footer__brand">
+        <span aria-hidden="true" style="color:var(--mint)">◇</span> {SITE.name}
+      </div>
+      <p class="muted footer__tag">{SITE.tagline}</p>
+    </div>
+    <nav class="footer__links" aria-label="Footer">
+      <a href="/concept">The Concept</a>
+      <a href="/blog">Digest</a>
+      <a href="/about">About</a>
+      <a href="/rss.xml">RSS</a>
+      <a href={LINKS.xProfile} target="_blank" rel="me noopener">X</a>
+      <a href={LINKS.linkedin} target="_blank" rel="me noopener">LinkedIn</a>
+    </nav>
+  </div>
+  <div class="wrap footer__meta">
+    <span class="term">
+      <span class="k">//</span> built in the open · {year}
+    </span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: clamp(3rem, 8vw, 6rem);
+  }
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-top: 2.4rem;
+  }
+  .footer__brand {
+    font-family: var(--mono);
+    font-weight: 700;
+  }
+  .footer__tag {
+    margin: 0.4rem 0 0;
+    font-size: 0.85rem;
+    max-width: 32ch;
+  }
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+  .footer__links a {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+  .footer__links a:hover {
+    color: var(--mint);
+    text-decoration: none;
+  }
+  .footer__meta {
+    padding: 1.6rem 0 2.4rem;
+    font-size: 0.78rem;
+  }
+</style>

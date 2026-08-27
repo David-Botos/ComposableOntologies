@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects.
+# Primary URL is the apex (composableontologies.com); send www → apex.
+https://www.composableontologies.com/* https://composableontologies.com/:splat 301

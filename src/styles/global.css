@@ -1,0 +1,404 @@
+/* ===========================================================================
+   Composable Ontologies — design system
+   Blueprint-grid, monospace, cream-on-near-black, mint + amber accents.
+   Modeled on the Galadriel post-mortem deck.
+   =========================================================================== */
+
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/700.css';
+@import '@fontsource-variable/inter';
+
+:root {
+  /* surfaces */
+  --bg: #0c0d0c;
+  --bg-panel: #131513;
+  --bg-panel-2: #1a1c1a;
+  --grid-line: rgba(233, 226, 205, 0.045);
+  --grid-line-strong: rgba(233, 226, 205, 0.08);
+
+  /* ink */
+  --cream: #f2ecda;
+  --cream-dim: #cbc6b6;
+  --muted: #8b897c;
+  --muted-2: #5f5e55;
+
+  /* accents */
+  --mint: #8fe6a4;
+  --mint-dim: #4f7d5f;
+  --amber: #e6b567;
+  --coral: #e07a5f;
+  --blue: #7ec7d8;
+  --yellow: #e8d48a;
+
+  /* borders */
+  --line: rgba(242, 236, 218, 0.16);
+  --line-bright: rgba(242, 236, 218, 0.34);
+
+  /* type */
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', monospace;
+  --sans: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* layout */
+  --maxw: 1120px;
+  --maxw-read: 720px;
+  --radius: 4px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: var(--bg);
+  /* blueprint grid */
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+  color: var(--cream);
+  font-family: var(--mono);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+/* ------------------------------------------------------------------ layout */
+/* .wrap sets ONLY horizontal padding; .section* set ONLY vertical.
+   Kept on separate axes so a section that is also a .wrap keeps both
+   (a `padding` shorthand on either would zero the other axis). */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.section {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  position: relative;
+}
+
+.section--tight {
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+
+/* phones: tighten vertical rhythm so the page doesn't feel sparse */
+@media (max-width: 600px) {
+  .section {
+    padding-block: 2.4rem;
+  }
+  .section--tight {
+    padding-block: 1.6rem;
+  }
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------- type */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--mono);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6em;
+  color: var(--cream);
+}
+
+h1 {
+  font-size: clamp(2.2rem, 6vw, 3.9rem);
+}
+h2 {
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+}
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+}
+
+p {
+  margin: 0 0 1.1rem;
+}
+
+a {
+  color: var(--mint);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--bg-panel-2);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.12em 0.4em;
+  color: var(--mint);
+}
+
+.lead {
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  color: var(--cream-dim);
+  line-height: 1.55;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------- panels */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.4rem, 3vw, 2rem);
+}
+
+/* framed panel with corner brackets, echoing the deck */
+.bracket {
+  position: relative;
+  padding: clamp(1.5rem, 3.5vw, 2.4rem);
+}
+.bracket::before,
+.bracket::after {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--mint);
+  pointer-events: none;
+}
+.bracket::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+.bracket::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+/* second element for the other two corners */
+.bracket > .bracket-corners::before,
+.bracket > .bracket-corners::after {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--mint);
+  pointer-events: none;
+}
+.bracket > .bracket-corners::before {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+.bracket > .bracket-corners::after {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+/* offset "stacked box" look from the open-questions slide.
+   Right/bottom margin reserves room for the offset backing so it
+   never bleeds past the container (which caused mobile h-scroll). */
+.stackbox {
+  position: relative;
+  background: var(--bg-panel);
+  border: 1px solid var(--line-bright);
+  border-radius: var(--radius);
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  margin: 0 8px 8px 0;
+}
+.stackbox::after {
+  content: '';
+  position: absolute;
+  inset: 8px -8px -8px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  z-index: -1;
+}
+
+/* ----------------------------------------------------------------- chips */
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.18em 0.7em;
+}
+.tag--mint {
+  color: var(--mint);
+  border-color: var(--mint-dim);
+}
+.tag--amber {
+  color: var(--amber);
+  border-color: rgba(230, 181, 103, 0.4);
+}
+
+/* --------------------------------------------------------------- buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 44px; /* comfortable touch target */
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0.85em 1.35em;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-bright);
+  color: var(--cream);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+.btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+  border-color: var(--cream);
+}
+.btn--primary {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: #0a1a0f;
+  font-weight: 700;
+}
+.btn--primary:hover {
+  background: #a3f0b8;
+  border-color: #a3f0b8;
+  color: #0a1a0f;
+}
+.btn--amber {
+  background: transparent;
+  border-color: var(--amber);
+  color: var(--amber);
+}
+.btn--amber:hover {
+  background: rgba(230, 181, 103, 0.12);
+  border-color: var(--amber);
+}
+
+/* --------------------------------------------------------------- helpers */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.6rem);
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.4rem);
+}
+
+.stack > * + * {
+  margin-top: 1rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.mono-label {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* terminal line */
+.term {
+  font-family: var(--mono);
+  color: var(--cream-dim);
+}
+.term .k {
+  color: var(--mint);
+}
+.term .w {
+  color: var(--amber);
+}
+
+/* setup hint banner (dev-only content editors can delete) */
+.setup-hint {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--amber);
+  border: 1px dashed rgba(230, 181, 103, 0.5);
+  border-radius: var(--radius);
+  padding: 0.5em 0.8em;
+  margin-top: 0.8rem;
+  background: rgba(230, 181, 103, 0.05);
+}
+
+/* accessible focus */
+:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+}
+
+/* skip link */
+.skip {
+  position: absolute;
+  left: -999px;
+}
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  background: var(--mint);
+  color: #0a1a0f;
+  padding: 0.5em 1em;
+  border-radius: var(--radius);
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

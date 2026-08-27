@@ -1,0 +1,204 @@
+---
+import { SITE } from '../config';
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+const items = [
+  { href: '/', label: 'Home' },
+  { href: '/concept', label: 'The Concept' },
+  { href: '/blog', label: 'Digest' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a href="/" class="nav__brand" aria-label={`${SITE.name} home`}>
+      <span class="nav__glyph" aria-hidden="true">◇</span>
+      <span class="nav__name">composable<span class="nav__accent">.ontologies</span></span>
+    </a>
+
+    <!-- desktop nav -->
+    <nav class="nav__links" aria-label="Primary">
+      {
+        items.map((it) => (
+          <a href={it.href} class={`nav__link${isActive(it.href) ? ' is-active' : ''}`}>
+            {it.label}
+          </a>
+        ))
+      }
+      <a href="/#join" class="btn btn--primary nav__cta">Join →</a>
+    </nav>
+
+    <!-- mobile nav -->
+    <div class="nav__mobile">
+      <a href="/#join" class="btn btn--primary nav__cta">Join →</a>
+      <details class="nav__disc">
+        <summary class="nav__toggle" aria-label="Menu">
+          <svg class="nav__ico nav__ico--bars" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg class="nav__ico nav__ico--x" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </summary>
+        <nav class="nav__panel" aria-label="Primary">
+          {
+            items.map((it) => (
+              <a href={it.href} class={`nav__panelLink${isActive(it.href) ? ' is-active' : ''}`}>
+                {it.label}
+              </a>
+            ))
+          }
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 62px;
+  }
+  .nav__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--cream);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+  }
+  .nav__brand:hover {
+    text-decoration: none;
+  }
+  .nav__glyph {
+    color: var(--mint);
+    font-size: 1.1em;
+  }
+  .nav__name {
+    font-family: var(--mono);
+    font-size: 0.98rem;
+  }
+  .nav__accent {
+    color: var(--mint);
+  }
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 2vw, 1.4rem);
+  }
+  .nav__link {
+    font-family: var(--mono);
+    font-size: 0.86rem;
+    color: var(--muted);
+    padding: 0.3em 0;
+  }
+  .nav__link:hover {
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav__link.is-active {
+    color: var(--cream);
+  }
+  .nav__cta {
+    padding: 0.55em 0.95em;
+    min-height: 38px;
+    font-size: 0.82rem;
+  }
+
+  /* mobile menu, hidden on desktop */
+  .nav__mobile {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .nav__disc {
+    position: relative;
+  }
+  .nav__toggle {
+    list-style: none;
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line-bright);
+    border-radius: var(--radius);
+    color: var(--cream);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav__toggle::-webkit-details-marker {
+    display: none;
+  }
+  .nav__ico--x {
+    display: none;
+  }
+  .nav__disc[open] .nav__ico--bars {
+    display: none;
+  }
+  .nav__disc[open] .nav__ico--x {
+    display: block;
+  }
+  .nav__panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.6rem);
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.4rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-bright);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  }
+  .nav__panelLink {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: var(--cream-dim);
+    padding: 0.7rem 0.8rem;
+    border-radius: 3px;
+  }
+  .nav__panelLink:hover {
+    text-decoration: none;
+    background: var(--bg-panel-2);
+    color: var(--cream);
+  }
+  .nav__panelLink.is-active {
+    color: var(--mint);
+  }
+
+  @media (max-width: 640px) {
+    .nav__links {
+      display: none;
+    }
+    .nav__mobile {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  // Close the mobile menu when a link is tapped or when tapping outside.
+  document.querySelectorAll<HTMLDetailsElement>('.nav__disc').forEach((d) => {
+    d.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => d.removeAttribute('open'))
+    );
+    document.addEventListener('click', (e) => {
+      if (d.open && !d.contains(e.target as Node)) d.removeAttribute('open');
+    });
+  });
+</script>

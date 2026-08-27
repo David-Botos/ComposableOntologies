@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JoinBlock from '../../components/JoinBlock.astro';
+
+const posts = (await getCollection('blog', ({ data }) => import.meta.env.PROD ? !data.draft : true))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<BaseLayout
+  title="The Digest"
+  path="/blog"
+  description="A monthly digest of the most interesting things in graph data, ontologies, and entity resolution — digested with commentary."
+>
+  <section class="wrap blog__head">
+    <h1>Reading the graph-data world, out loud.</h1>
+    <p class="lead muted">
+      Roughly monthly. The papers, posts, and tools worth your time — each with
+      a note on why it matters for composable ontologies.
+    </p>
+  </section>
+
+  <section class="wrap">
+    {posts.length === 0 ? (
+      <p class="muted">First issue is being written. Subscribe below to catch it.</p>
+    ) : (
+      <ul class="posts">
+        {posts.map((post) => (
+          <li class="posts__item">
+            <a href={`/blog/${post.id}/`} class="posts__link">
+              <div class="posts__meta">
+                <span class={`tag ${post.data.kind === 'digest' ? 'tag--amber' : 'tag--mint'}`}>
+                  {post.data.kind}
+                </span>
+                <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+                {post.data.draft && <span class="tag">draft</span>}
+              </div>
+              <h2 class="posts__title">{post.data.title}</h2>
+              <p class="posts__desc muted">{post.data.description}</p>
+              <span class="posts__more">Read →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+
+  <section class="wrap section">
+    <hr class="rule" />
+    <div style="height: 2.5rem"></div>
+    <JoinBlock />
+  </section>
+</BaseLayout>
+
+<style>
+  .blog__head {
+    padding-block: clamp(2.5rem, 7vw, 4.5rem) 2rem;
+    max-width: 58ch;
+  }
+  .posts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .posts__link {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--cream);
+    background: var(--bg-panel);
+    transition: border-color 0.15s ease, transform 0.12s ease;
+  }
+  .posts__link:hover {
+    text-decoration: none;
+    border-color: var(--line-bright);
+    transform: translateY(-2px);
+  }
+  .posts__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+  .posts__title {
+    font-size: clamp(1.25rem, 3vw, 1.7rem);
+    margin: 0 0 0.5rem;
+  }
+  .posts__desc {
+    margin: 0 0 0.9rem;
+    max-width: 70ch;
+    font-size: 0.95rem;
+  }
+  .posts__more {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--mint);
+  }
+</style>

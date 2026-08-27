@@ -1,0 +1,478 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import JoinBlock from '../components/JoinBlock.astro';
+
+const outcomes = [
+  {
+    k: 'Strategic & political reasoning',
+    d: 'The real chain behind a decision — who wanted what, what it traded against.',
+  },
+  {
+    k: 'Code that holds the strategy',
+    d: 'Agents that code with the strategic direction in context, not just the ticket.',
+  },
+  {
+    k: 'Faster, context-aware support',
+    d: 'Every ticket answered against the client’s full history — not a cold queue.',
+  },
+  {
+    k: 'Custom client portals',
+    d: 'A bespoke client view straight from your graph, each item linked to the live record.',
+  },
+];
+
+const gaps = [
+  'No way to author an ontology without legacy OWL / semantic-web tooling.',
+  'No way to share one, or build it collaboratively.',
+  'No tooling to knit two ontologies together.',
+  'Ontologies aren’t code, so agents can’t help build them.',
+  'No way to run an ontology-as-code to constrain LLM extraction into valid graph additions.',
+  'No tooling for agents to prune context — to drop what no longer earns its place.',
+];
+
+const building = [
+  {
+    k: 'Author & share ontologies, as code',
+    d: 'Build ontologies together and express them as code — one definition that drives AI extraction and entity resolution.',
+  },
+  {
+    k: 'Compose ontologies into layered insight',
+    d: 'The glue that turns two domain models into insight neither holds alone.',
+  },
+  {
+    k: 'Navigate the substrate with agents',
+    d: 'Explore composed ontologies with agents, so anyone can build their own brain on the shared substrate.',
+  },
+];
+
+---
+
+<BaseLayout
+  title="The Concept"
+  path="/concept"
+  description="Composable ontologies would unlock real value — but the tools for domain experts to build, share, compose, and execute their own ontologies don't exist yet. That gap is the project."
+>
+  <!-- ============================================================== HERO -->
+  <section class="chero wrap">
+    <h1 class="chero__title">
+      The problem is worth solving.<br />
+      <span class="chero__accent">The tools to solve it don't exist yet.</span>
+    </h1>
+    <p class="chero__lead">
+      A well-built domain graph unlocks reasoning, code, and support no flat
+      pile of documents can. But no tools let a domain expert build one. Closing
+      that gap is the project.
+    </p>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- =========================================================== OUTCOMES -->
+  <section class="section wrap">
+    <h2 class="sec__h">What a well-built domain graph unlocks</h2>
+    <div class="outcomes">
+      {
+        outcomes.map((o) => (
+          <div class="outcome">
+            <h3 class="outcome__k">{o.k}</h3>
+            <p class="outcome__d">{o.d}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="proof">
+      <p class="proof__tag term"><span class="k">//</span> not hypothetical</p>
+      <p class="proof__body">
+        For one client I generated a bespoke interface from their code, meetings,
+        emails, and tickets — the graph surfacing the right context at the right
+        time. Nobody designed that page. It was assembled from the substrate, for
+        that client, once.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ========================================================== EXPERTISE -->
+  <section class="section wrap band">
+    <div class="band__inner">
+      <h2 class="sec__h">This takes expertise, not a prompt.</h2>
+      <p class="lead">
+        The value isn't in pointing an LLM at your data. It's in the judgment
+        underneath — designing the model, manicuring what gets in, weighing
+        what carries strategic weight, pruning what doesn't.
+      </p>
+      <p class="muted">
+        That's domain-expert work — the business-process owner, the clinician,
+        the caseworker — not a data team guessing at a field they've never used.
+      </p>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ============================================================== GAP -->
+  <section class="section wrap">
+    <h2 class="sec__h">The tools don't exist yet.</h2>
+    <p class="lead gap__intro">
+      Today you're handed legacy semantic-web tooling — OWL files, editors built
+      for researchers, nothing that speaks code or agents. What's missing:
+    </p>
+    <ol class="gaps">
+      {
+        gaps.map((g, i) => (
+          <li class="gap">
+            <span class="gap__box" aria-hidden="true">[ ]</span>
+            <span class="gap__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <span class="gap__t">{g}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="gap__foot">
+      Every unchecked box is a tool this project intends to build — in the open,
+      as infrastructure the community owns, not a personal company.
+    </p>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ========================================================== BUILDING -->
+  <section class="section wrap">
+    <h2 class="sec__h">So here's what we're building.</h2>
+    <p class="lead build__intro">
+      Three initiatives, in order — each one making the next possible.
+    </p>
+    <ol class="build">
+      {
+        building.map((p, i) => (
+          <li class="pillar">
+            <span class="pillar__n" aria-hidden="true">{i + 1}</span>
+            <div class="pillar__body">
+              <h3 class="pillar__k">{p.k}</h3>
+              <p class="pillar__d">{p.d}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ===================================================== DETERMINISTIC -->
+  <section class="section wrap">
+    <h2 class="sec__h">The leverage: constrain deterministic vs. LLM output.</h2>
+    <p class="lead det__intro">
+      A “company brain” sounds soft. But a graph with the right deterministic
+      rules can model far higher-stakes domains — clinical, legal, civic — with
+      precision. The craft is knowing which is which.
+    </p>
+    <div class="det">
+      <div class="det__col">
+        <h3 class="det__k">Deterministic rules</h3>
+        <p class="det__what">Hard keys, constraints, validations, unit conversions.</p>
+        <p class="det__when muted">
+          For anything that must be right: identity, eligibility, thresholds —
+          anything a wrong LLM guess would make dangerous.
+        </p>
+      </div>
+      <div class="det__col det__col--b">
+        <h3 class="det__k det__k--amber">LLM inference</h3>
+        <p class="det__what">Extraction, fuzzy resolution, judgment calls, summarization.</p>
+        <p class="det__when muted">
+          For turning unstructured source into structured candidates — always
+          proposed, never committed without a gate.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- =========================================================== CREDENTIAL -->
+  <section class="section wrap">
+    <h2 class="sec__h">This isn't theory.</h2>
+    <div class="cred">
+      <div class="cred__stat">
+        <span class="cred__num">16,879</span>
+        <span class="cred__label">nodes, production data</span>
+      </div>
+      <div class="cred__text">
+        <p>
+          I built <strong>Galadriel</strong> — a knowledge graph of a whole
+          company's memory — and used it to generate per-client interfaces from
+          their code, meetings, emails, and tickets. It proved the real point:
+          <strong>the interface is disposable; the interoperable, interpretable
+          substrate underneath is the asset.</strong>
+        </p>
+        <p class="muted">
+          It also ran me into every gap on this page. The endeavor is worth it —
+          just bottlenecked by tools that don't exist. So the plan is to build
+          them.
+        </p>
+        <p class="cred__link"><a href="/blog/every-company-needs-its-own-ontology/">Read the longer write-up →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <section class="section--tight wrap">
+    <JoinBlock />
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------------------------------------------------------------- hero */
+  .chero {
+    padding-block: clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .chero__title {
+    font-size: clamp(2rem, 5.5vw, 3.6rem);
+    max-width: 20ch;
+  }
+  .chero__accent {
+    color: var(--mint);
+  }
+  .chero__lead {
+    max-width: 60ch;
+    margin-top: 1.4rem;
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+    line-height: 1.5;
+    color: var(--cream-dim);
+  }
+
+  /* shared section heading */
+  .sec__h {
+    max-width: 24ch;
+  }
+
+  /* ------------------------------------------------------------ outcomes */
+  .outcomes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: clamp(1.4rem, 3vw, 2.2rem);
+    margin-top: 1.8rem;
+  }
+  .outcome__k {
+    font-size: 1.1rem;
+    margin: 0 0 0.5rem;
+    color: var(--cream);
+  }
+  .outcome__k::before {
+    content: '→ ';
+    color: var(--mint);
+  }
+  .outcome__d {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: 44ch;
+  }
+
+  .proof {
+    margin-top: 2.6rem;
+    border: 1px solid var(--mint-dim);
+    border-radius: var(--radius);
+    background: rgba(143, 230, 164, 0.05);
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+  }
+  .proof__tag {
+    margin: 0 0 0.6rem;
+    font-size: 0.8rem;
+    color: var(--mint);
+  }
+  .proof__body {
+    margin: 0;
+    color: var(--cream-dim);
+    max-width: 68ch;
+  }
+
+  /* -------------------------------------------------------------- band */
+  .band__inner {
+    max-width: 62ch;
+  }
+  .band .lead {
+    color: var(--cream-dim);
+  }
+
+  /* --------------------------------------------------------------- gaps */
+  .gap__intro {
+    max-width: 62ch;
+    color: var(--cream-dim);
+  }
+  .gaps {
+    list-style: none;
+    margin: 1.8rem 0 0;
+    padding: 0;
+    max-width: 72ch;
+  }
+  .gap {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 0.9rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .gap:last-of-type {
+    border-bottom: 1px solid var(--line);
+  }
+  .gap__box {
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: -0.05em;
+  }
+  .gap__n {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted-2);
+  }
+  .gap__t {
+    color: var(--cream-dim);
+    max-width: 66ch;
+  }
+  .gap__foot {
+    margin-top: 1.4rem;
+    color: var(--mint);
+    font-size: 0.95rem;
+    max-width: 62ch;
+  }
+
+  /* ----------------------------------------------------------- building */
+  .build__intro {
+    max-width: 56ch;
+    color: var(--cream-dim);
+  }
+  .build {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    max-width: 78ch;
+  }
+  .pillar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1rem, 3vw, 1.8rem);
+    align-items: start;
+    padding: 1.6rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .pillar:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .pillar__n {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    line-height: 1;
+    color: var(--mint);
+    font-variant-numeric: tabular-nums;
+  }
+  .pillar__k {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+    color: var(--cream);
+  }
+  .pillar__d {
+    margin: 0;
+    color: var(--muted);
+    max-width: 62ch;
+  }
+
+  /* ------------------------------------------------------- deterministic */
+  .det__intro {
+    max-width: 62ch;
+    color: var(--cream-dim);
+  }
+  .det {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.4rem, 4vw, 3rem);
+    margin-top: 2rem;
+    align-items: start;
+  }
+  .det__col--b {
+    padding-left: clamp(1.4rem, 4vw, 3rem);
+    border-left: 1px solid var(--line);
+  }
+  @media (max-width: 680px) {
+    .det {
+      grid-template-columns: 1fr;
+      gap: 1.6rem;
+    }
+    .det__col--b {
+      padding-left: 0;
+      border-left: none;
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--line);
+    }
+  }
+  .det__k {
+    font-size: 1.15rem;
+    margin: 0 0 0.6rem;
+    color: var(--mint);
+  }
+  .det__k--amber {
+    color: var(--amber);
+  }
+  .det__what {
+    margin: 0 0 0.6rem;
+    color: var(--cream);
+    font-size: 0.98rem;
+    max-width: 40ch;
+  }
+  .det__when {
+    margin: 0;
+    font-size: 0.9rem;
+    max-width: 40ch;
+  }
+
+  /* --------------------------------------------------------- credential */
+  .cred {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    align-items: start;
+    margin-top: 1.4rem;
+  }
+  @media (max-width: 640px) {
+    .cred {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+  }
+  .cred__stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .cred__num {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    color: var(--cream);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .cred__label {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+  .cred__text {
+    max-width: 60ch;
+  }
+  .cred__text p {
+    color: var(--cream-dim);
+  }
+  .cred__link {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+  }
+</style>

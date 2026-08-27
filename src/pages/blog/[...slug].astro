@@ -1,0 +1,158 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import JoinBlock from '../../components/JoinBlock.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  path={`/blog/${post.id}/`}
+  ogType="article"
+>
+  <article class="wrap post">
+    <a href="/blog" class="post__back">← the digest</a>
+    <header class="post__head">
+      <div class="post__meta">
+        <span class={`tag ${post.data.kind === 'digest' ? 'tag--amber' : 'tag--mint'}`}>
+          {post.data.kind}
+        </span>
+        <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+      </div>
+      <h1>{post.data.title}</h1>
+      <p class="lead muted">{post.data.description}</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+    {post.data.tags.length > 0 && (
+      <div class="post__tags">
+        {post.data.tags.map((t) => <span class="tag">#{t}</span>)}
+      </div>
+    )}
+  </article>
+
+  <div class="wrap section">
+    <hr class="rule" />
+    <div style="height: 2rem"></div>
+    <JoinBlock compact />
+  </div>
+</BaseLayout>
+
+<style>
+  .post {
+    max-width: var(--maxw-read);
+    padding-top: clamp(1.5rem, 5vw, 3rem);
+  }
+  .post__back {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .post__head {
+    padding: 1.2rem 0 1.5rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 2rem;
+  }
+  .post__meta {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .post__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* long-form reading: switch body to sans for lower fatigue */
+  .prose {
+    font-family: var(--sans);
+    font-size: 1.06rem;
+    line-height: 1.72;
+    color: var(--cream-dim);
+  }
+  .prose :global(h2) {
+    font-family: var(--mono);
+    margin: 2.4rem 0 0.8rem;
+    font-size: 1.5rem;
+    color: var(--cream);
+  }
+  .prose :global(h3) {
+    font-family: var(--mono);
+    margin: 1.8rem 0 0.6rem;
+    font-size: 1.2rem;
+    color: var(--cream);
+  }
+  .prose :global(p) {
+    margin: 0 0 1.2rem;
+  }
+  .prose :global(a) {
+    color: var(--mint);
+  }
+  .prose :global(strong) {
+    color: var(--cream);
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 1.2rem;
+    padding-left: 1.3rem;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .prose :global(blockquote) {
+    border-left: 2px solid var(--mint-dim);
+    margin: 1.4rem 0;
+    padding: 0.3rem 0 0.3rem 1.2rem;
+    color: var(--cream);
+    font-style: italic;
+  }
+  .prose :global(code) {
+    font-family: var(--mono);
+    font-size: 0.85em;
+  }
+  .prose :global(pre) {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1rem 1.2rem;
+    overflow-x: auto;
+    margin: 0 0 1.4rem;
+  }
+  .prose :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+  }
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 2rem 0;
+  }
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+  }
+</style>

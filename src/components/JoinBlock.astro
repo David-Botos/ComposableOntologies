@@ -1,0 +1,174 @@
+---
+import { LINKS, HAS_X_COMMUNITY } from '../config';
+const { compact = false } = Astro.props;
+const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LINKS.buttondownUsername}`;
+---
+
+<section id="join" class="join">
+  {!compact && (
+    <div class="join__head">
+      <h2>Help build this in the open.</h2>
+      <p class="join__mission">
+        I'm calling on <strong>builders, ontologists, and anyone serious about
+        impactful AI</strong>. This thesis only becomes real with your
+        experience and judgment — and it should be <strong>open infrastructure
+        the community owns, not a personal company</strong>. If that's you, get in.
+      </p>
+    </div>
+  )}
+
+  <div class="join__grid">
+    <!-- Follow / community -->
+    <div class="stackbox join__card">
+      {HAS_X_COMMUNITY ? (
+        <>
+          <h3 class="join__cardTitle">Join the group on X</h3>
+          <p class="muted join__cardBody">
+            Where people building this infrastructure gather. Lurk, argue, or ship.
+          </p>
+          <a class="btn btn--primary" href={LINKS.xCommunity} target="_blank" rel="noopener">
+            Join the X community →
+          </a>
+        </>
+      ) : (
+        <>
+          <h3 class="join__cardTitle">Introduce yourself</h3>
+          <p class="muted join__cardBody">
+            Follow the work, then reach out — tell me what you'd build, what
+            you'd challenge, and where your expertise fits. A community forms
+            once there are enough of us.
+          </p>
+          <div class="join__follow">
+            <a class="btn btn--primary" href={LINKS.xProfile} target="_blank" rel="noopener">
+              Follow on X →
+            </a>
+            <a class="btn" href={LINKS.linkedin} target="_blank" rel="noopener">
+              Connect on LinkedIn →
+            </a>
+          </div>
+        </>
+      )}
+    </div>
+
+    <!-- Newsletter -->
+    <div class="stackbox join__card">
+      <h3 class="join__cardTitle">Graph-data readings, digested</h3>
+      <p class="muted join__cardBody">
+        Monthly: graph data, ontologies, and entity resolution — with my notes
+        on why each one matters.
+      </p>
+      <form
+        class="sub"
+        action={buttondownAction}
+        method="post"
+        target="_blank"
+      >
+        <label class="sr-only" for="bd-email">Email address</label>
+        <input
+          id="bd-email"
+          type="email"
+          name="email"
+          placeholder="you@domain.com"
+          autocomplete="email"
+          required
+        />
+        <button type="submit" class="btn btn--amber">Subscribe →</button>
+      </form>
+      <p class="sub__fine muted">No spam. One email a month. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .join__mission {
+    margin: 1rem 0 0;
+    max-width: 60ch;
+    color: var(--cream-dim);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.55;
+  }
+  .join__mission strong {
+    color: var(--cream);
+  }
+  .join__head {
+    max-width: 62ch;
+    margin-bottom: 2.2rem;
+  }
+  .join__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(1.2rem, 3vw, 2rem);
+  }
+  .join__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .join__cardTitle {
+    margin: 0.2rem 0 0;
+  }
+  .join__cardBody {
+    margin: 0;
+    font-size: 0.95rem;
+    flex: 1;
+  }
+  .join__follow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .sub {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .sub input {
+    flex: 1;
+    min-width: 0;
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--cream);
+    background: var(--bg);
+    border: 1px solid var(--line-bright);
+    border-radius: var(--radius);
+    padding: 0.7em 0.9em;
+  }
+  .sub input::placeholder {
+    color: var(--muted-2);
+  }
+  .sub input:focus-visible {
+    border-color: var(--amber);
+    outline: none;
+  }
+  .sub__fine {
+    font-size: 0.75rem;
+    margin: 0;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  /* phones: stack controls full-width for easy tapping */
+  @media (max-width: 520px) {
+    .join__follow {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .join__follow .btn {
+      width: 100%;
+    }
+    .sub {
+      flex-direction: column;
+    }
+    .sub input,
+    .sub button {
+      width: 100%;
+    }
+  }
+</style>
