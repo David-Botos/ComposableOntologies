@@ -1,0 +1,9 @@
+{
+  // Static-assets-only Worker: serves the Astro build in ./dist.
+  // Deploy runs: npm run build  →  npx wrangler deploy
+  "name": "composableontologies",
+  "compatibility_date": "2024-11-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}
