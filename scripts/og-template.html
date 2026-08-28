@@ -38,15 +38,15 @@
       .bracket { position: absolute; width: 46px; height: 46px; border: 3px solid #8fe6a4; }
       .bracket.tl { top: 46px; left: 46px; border-right: none; border-bottom: none; }
       .bracket.br { bottom: 46px; right: 46px; border-left: none; border-top: none; }
-      .inner { position: absolute; left: 80px; top: 190px; }
+      .inner { position: absolute; left: 80px; top: 200px; width: 820px; }
       .eyebrow {
         color: #8fe6a4; font-size: 30px; letter-spacing: 6px; font-weight: 700;
       }
-      h1 { font-size: 78px; font-weight: 700; line-height: 1.06; margin-top: 26px; letter-spacing: -1px; }
+      h1 { font-size: 68px; font-weight: 700; line-height: 1.08; margin-top: 26px; letter-spacing: -1px; }
       h1 .a { color: #8fe6a4; }
       .sub { color: #cbc6b6; font-size: 27px; margin-top: 30px; }
-      /* mini graph, right */
-      svg.graph { position: absolute; right: 90px; top: 150px; }
+      /* mini graph, tucked into the right margin, clear of the text */
+      svg.graph { position: absolute; right: 64px; top: 195px; }
     </style>
   </head>
   <body>
@@ -58,7 +58,7 @@
         <h1>Every domain is a<br /><span class="a">unique fingerprint.</span></h1>
         <div class="sub">The composable data layer for cross-domain AI.</div>
       </div>
-      <svg class="graph" width="300" height="300" viewBox="0 0 300 300" aria-hidden="true">
+      <svg class="graph" width="240" height="240" viewBox="0 0 300 300" aria-hidden="true">
         <g stroke="rgba(233,226,205,0.35)" stroke-width="1.4" fill="none">
           <line x1="150" y1="30" x2="50" y2="150" /><line x1="150" y1="30" x2="250" y2="140" />
           <line x1="50" y1="150" x2="150" y2="260" /><line x1="250" y1="140" x2="150" y2="260" />
