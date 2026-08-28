@@ -1,0 +1,75 @@
+<!doctype html>
+<!--
+  Open Graph share image source (1200×630). Edit the copy below, then re-render
+  to public/og.png with a 1200×630 headless screenshot. Fonts load from
+  node_modules via relative paths, so keep this file in scripts/.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-weight: 400;
+        src: url('../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2')
+          format('woff2');
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-weight: 700;
+        src: url('../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2')
+          format('woff2');
+      }
+      * { margin: 0; box-sizing: border-box; }
+      html, body { width: 1200px; height: 630px; }
+      .og {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background-color: #0c0d0c;
+        background-image:
+          linear-gradient(rgba(233, 226, 205, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(233, 226, 205, 0.05) 1px, transparent 1px);
+        background-size: 44px 44px;
+        font-family: 'JetBrains Mono', monospace;
+        color: #f2ecda;
+      }
+      .bracket { position: absolute; width: 46px; height: 46px; border: 3px solid #8fe6a4; }
+      .bracket.tl { top: 46px; left: 46px; border-right: none; border-bottom: none; }
+      .bracket.br { bottom: 46px; right: 46px; border-left: none; border-top: none; }
+      .inner { position: absolute; left: 80px; top: 190px; }
+      .eyebrow {
+        color: #8fe6a4; font-size: 30px; letter-spacing: 6px; font-weight: 700;
+      }
+      h1 { font-size: 78px; font-weight: 700; line-height: 1.06; margin-top: 26px; letter-spacing: -1px; }
+      h1 .a { color: #8fe6a4; }
+      .sub { color: #cbc6b6; font-size: 27px; margin-top: 30px; }
+      /* mini graph, right */
+      svg.graph { position: absolute; right: 90px; top: 150px; }
+    </style>
+  </head>
+  <body>
+    <div class="og">
+      <div class="bracket tl"></div>
+      <div class="bracket br"></div>
+      <div class="inner">
+        <div class="eyebrow">&gt; COMPOSABLE ONTOLOGIES</div>
+        <h1>Every domain is a<br /><span class="a">unique fingerprint.</span></h1>
+        <div class="sub">The composable data layer for cross-domain AI.</div>
+      </div>
+      <svg class="graph" width="300" height="300" viewBox="0 0 300 300" aria-hidden="true">
+        <g stroke="rgba(233,226,205,0.35)" stroke-width="1.4" fill="none">
+          <line x1="150" y1="30" x2="50" y2="150" /><line x1="150" y1="30" x2="250" y2="140" />
+          <line x1="50" y1="150" x2="150" y2="260" /><line x1="250" y1="140" x2="150" y2="260" />
+          <line x1="150" y1="30" x2="150" y2="260" /><line x1="50" y1="150" x2="250" y2="140" />
+        </g>
+        <g fill="#f2ecda">
+          <circle cx="150" cy="30" r="9" /><circle cx="50" cy="150" r="8" />
+          <circle cx="250" cy="140" r="8" /><circle cx="150" cy="260" r="9" />
+        </g>
+        <circle cx="150" cy="150" r="8" fill="#8fe6a4" />
+      </svg>
+    </div>
+  </body>
+</html>
