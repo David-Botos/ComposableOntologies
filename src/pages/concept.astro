@@ -109,7 +109,8 @@ const statusLabels = {
       field, not sold as a product.
     </h1>
 
-    <div class="who__manifesto">
+    <div class="who__manifesto bracket">
+      <div class="bracket-corners"></div>
       <p>
         I'm against vendor capture for a reason bigger than architecture. When
         the substrate everyone builds on is owned by one company, the future
@@ -420,11 +421,11 @@ const statusLabels = {
     font-style: normal;
     color: var(--mint);
   }
-  /* the belief / why — set off as the emotional core with a mint edge */
+  /* the belief / why — framed with the blueprint corner-brackets (the site's
+     own motif) rather than a side border, so it reads as a deliberate,
+     set-apart statement */
   .who__manifesto {
-    max-width: 66ch;
-    border-left: 3px solid var(--mint-dim);
-    padding-left: clamp(1rem, 3vw, 1.6rem);
+    max-width: 68ch;
     margin: 0 0 2.8rem;
   }
   .who__manifesto p {
@@ -454,8 +455,8 @@ const statusLabels = {
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: clamp(0.8rem, 2vw, 1.1rem);
   }
-  /* each constituency gets its own accent (--accent set inline) so the row
-     reads as four distinct stakeholders, not one undifferentiated list */
+  /* each constituency gets its own accent (--accent set inline), carried by
+     the index number rather than a colored side border */
   .who__party {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -464,7 +465,6 @@ const statusLabels = {
     padding: clamp(1.1rem, 2.5vw, 1.4rem);
     background: var(--bg-panel);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
     border-radius: var(--radius);
   }
   .who__idx {
