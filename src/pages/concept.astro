@@ -94,6 +94,44 @@ const statusLabels = {
   open: 'open question',
 };
 
+// The four constituencies. One source of truth so "who it's for" (what each
+// group gets) and "why it can't be built alone" (why each group's contribution
+// is the missing piece) stay in lockstep — same order, number, and accent.
+const parties = [
+  {
+    n: '01',
+    accent: 'var(--blue)',
+    role: 'Companies & teams',
+    stake:
+      'Run on your own data as a durable asset — not a black box you rent and can’t inspect.',
+    why: 'You hit the messy, real use cases no roadmap predicts. Your constraints are what keep this honest instead of academic.',
+  },
+  {
+    n: '02',
+    accent: 'var(--amber)',
+    role: 'Operators & domain experts',
+    stake:
+      'Model your own world — the caseworker, clinician, or ops lead who actually knows it, not a data team guessing at it.',
+    why: 'Your domain only models correctly if the person who lives it draws the map. No one can guess it for you.',
+  },
+  {
+    n: '03',
+    accent: 'var(--mint)',
+    role: 'Ontologists & researchers',
+    stake:
+      'Carry the rigor of the field the last mile — into tooling people outside the lab actually ship.',
+    why: 'Decades of rigor shouldn’t stay in papers. Your judgment is how we avoid reinventing what the field already knows.',
+  },
+  {
+    n: '04',
+    accent: 'var(--coral)',
+    role: 'Builders & engineers',
+    stake:
+      'Author, compose, and run ontologies as code — with agents that can finally help build them.',
+    why: 'The tooling only gets real if the people who’ll live in it shape its ergonomics now, not after it’s set.',
+  },
+];
+
 ---
 
 <BaseLayout
@@ -129,36 +167,7 @@ const statusLabels = {
     <h2 class="who__label mono-label"><span class="who__labelK">//</span> who it's for</h2>
     <ul class="who__parties">
       {
-        [
-          {
-            n: '01',
-            accent: 'var(--blue)',
-            role: 'Companies & teams',
-            stake:
-              'Run on your own data as a durable asset — not a black box you rent and can’t inspect.',
-          },
-          {
-            n: '02',
-            accent: 'var(--amber)',
-            role: 'Operators & domain experts',
-            stake:
-              'Model your own world — the caseworker, clinician, or ops lead who actually knows it, not a data team guessing at it.',
-          },
-          {
-            n: '03',
-            accent: 'var(--mint)',
-            role: 'Ontologists & researchers',
-            stake:
-              'Carry the rigor of the field the last mile — into tooling people outside the lab actually ship.',
-          },
-          {
-            n: '04',
-            accent: 'var(--coral)',
-            role: 'Builders & engineers',
-            stake:
-              'Author, compose, and run ontologies as code — with agents that can finally help build them.',
-          },
-        ].map((p) => (
+        parties.map((p) => (
           <li class="who__party" style={`--accent: ${p.accent};`}>
             <span class="who__idx" aria-hidden="true">{p.n}</span>
             <div class="who__body">
@@ -169,6 +178,39 @@ const statusLabels = {
         ))
       }
     </ul>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ========================================================= WHY / TOGETHER -->
+  <section class="section wrap why">
+    <p class="why__kicker term"><span class="k">//</span> why it can't be built alone</p>
+    <h2 class="why__title">
+      The same reason it's composable is the reason I can't build it alone.
+    </h2>
+    <p class="lead why__intro">
+      No single person has the expertise to model every domain — support,
+      clinical, legal, civic, and ops each demand someone who actually lives in
+      them. That's not a hiring gap; it's the whole premise. Composable
+      ontologies exist <em>because</em> no one perspective captures every domain.
+      So the project has to be built the way the architecture works: many
+      experts, each owning the corner they know, composed. Building it alone
+      would contradict its own thesis.
+    </p>
+
+    <ol class="why__list">
+      {
+        parties.map((p) => (
+          <li class="why__item" style={`--accent: ${p.accent};`}>
+            <span class="why__n" aria-hidden="true">{p.n}</span>
+            <div class="why__body">
+              <h3 class="why__role">{p.role}</h3>
+              <p class="why__text">{p.why}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 
   <hr class="rule" />
@@ -485,6 +527,63 @@ const statusLabels = {
     font-size: 0.9rem;
     color: var(--cream-dim);
     max-width: 42ch;
+  }
+
+  /* ------------------------------------------------------- why / together */
+  /* numbered rows echo the who-it's-for accents (same number + colour per
+     group) but as a list, not a second card grid — variety over repetition,
+     and the accent stays on the numeral, never a side border */
+  .why__kicker {
+    font-size: 0.8rem;
+    color: var(--mint);
+    margin: 0 0 1rem;
+  }
+  .why__title {
+    max-width: 26ch;
+  }
+  .why__intro {
+    max-width: 66ch;
+    margin-top: 1.2rem;
+    color: var(--cream-dim);
+  }
+  .why__intro em {
+    font-style: normal;
+    color: var(--mint);
+  }
+  .why__list {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 0;
+    max-width: 80ch;
+  }
+  .why__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1rem, 3vw, 1.6rem);
+    align-items: baseline;
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .why__item:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+  .why__n {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+    line-height: 1;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .why__role {
+    margin: 0 0 0.3rem;
+    font-size: 1.05rem;
+    color: var(--cream);
+  }
+  .why__text {
+    margin: 0;
+    color: var(--cream-dim);
+    max-width: 60ch;
   }
 
   /* ---------------------------------------------------------------- hero */
