@@ -215,8 +215,9 @@ the convergence of unrelated fields on unification-based composition is a signal
 worth taking seriously. Everything above that is the current best guess.
 
 And here's the thing — the *mission* isn't even mine. Over a decade ago the
-Ontolog community named this exact problem and called it
-[OntoIOp](http://ontolog.cim3.net/wiki/OntoIOp.html), Ontology Integration and
+Ontolog community — academic and independent researchers — named this exact
+problem and called it
+[OntoIOp](https://ontolog.cim3.net/wiki/OntoIOp.html), Ontology Integration and
 Interoperability. They even enumerated its four concerns: **heterogeneity**
 (domains that don't share one logic), **modularity** (reusing existing models
 instead of rebuilding), **links** (relating models that stay distinct), and
@@ -224,10 +225,11 @@ instead of rebuilding), **links** (relating models that stay distinct), and
 composable-ontologies problem, stated precisely, years before I ran into it.
 
 So the real question this piece is circling isn't "which language is best." It's
-this: **OntoIOp defined the mission rigorously and built real tooling for it.
-What would it take to carry those same four goals the last mile — into everyday
-implementation, in the hands of the developers and organizations who'd actually
-use it?** That last mile is its own hard problem, and the three-layer split is
+this: **OntoIOp defined the mission rigorously and built real tooling for it, in
+the research world. What would it take to carry those same four goals into
+production — into everyday implementation, in the hands of the developers and
+organizations who'd actually use it?** That last mile is its own hard problem,
+distinct from the formal one they solved, and the three-layer split is
 my current guess at part of the answer. It's a guess, offered in the same spirit
 their work was.
 
