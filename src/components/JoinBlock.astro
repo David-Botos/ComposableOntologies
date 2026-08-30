@@ -11,9 +11,16 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
       <p class="join__mission">
         I'm calling on <strong>builders, ontologists, and anyone serious about
         impactful AI</strong>. This thesis only becomes real with your
-        experience and judgment — and it should be <strong>open infrastructure
-        the community owns, not a personal company</strong>. If that's you, get in.
+        experience and judgment. If that's you — this is the ground floor.
       </p>
+      <a
+        class="btn btn--primary join__headCta"
+        href={HAS_X_COMMUNITY ? LINKS.xCommunity : LINKS.xProfile}
+        target="_blank"
+        rel="noopener"
+      >
+        {HAS_X_COMMUNITY ? 'Join the community →' : 'Follow the build →'}
+      </a>
     </div>
   )}
 
@@ -26,7 +33,7 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
           <p class="muted join__cardBody">
             Where people building this infrastructure gather. Lurk, argue, or ship.
           </p>
-          <a class="btn btn--primary" href={LINKS.xCommunity} target="_blank" rel="noopener">
+          <a class={`btn ${compact ? 'btn--primary' : ''}`} href={LINKS.xCommunity} target="_blank" rel="noopener">
             Join the X community →
           </a>
         </>
@@ -39,7 +46,7 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
             once there are enough of us.
           </p>
           <div class="join__follow">
-            <a class="btn btn--primary" href={LINKS.xProfile} target="_blank" rel="noopener">
+            <a class={`btn ${compact ? 'btn--primary' : ''}`} href={LINKS.xProfile} target="_blank" rel="noopener">
               Follow on X →
             </a>
             <a class="btn" href={LINKS.linkedin} target="_blank" rel="noopener">
@@ -93,6 +100,17 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
   .join__head {
     max-width: 62ch;
     margin-bottom: 2.2rem;
+  }
+  .join__headCta {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    padding: 1em 1.6em;
+  }
+  @media (max-width: 520px) {
+    .join__headCta {
+      display: flex;
+      width: 100%;
+    }
   }
   .join__grid {
     display: grid;

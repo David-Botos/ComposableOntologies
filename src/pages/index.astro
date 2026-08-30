@@ -469,6 +469,17 @@ const concerns = [
     grid-template-columns: repeat(4, 1fr);
     gap: 0.6rem;
   }
+  /* phones: four silos at ~70px each is cramped — drop to a 2x2 so each
+     source stays legible */
+  @media (max-width: 560px) {
+    .silos__row {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+    .silo__label {
+      min-height: 0;
+    }
+  }
   .silo {
     display: flex;
     flex-direction: column;
@@ -524,10 +535,16 @@ const concerns = [
   }
 
   /* ------------------------------------------------------------ mission */
+  /* Amber is the section's own accent — this is the "prior work / research"
+     beat, held distinct from the mint that carries the forward/product claims,
+     so mint stops meaning "everything." */
   .mission__tag {
     font-size: 0.8rem;
-    color: var(--mint);
+    color: var(--amber);
     margin: 0 0 0.9rem;
+  }
+  .mission__tag .k {
+    color: var(--amber);
   }
   .mission__title {
     max-width: 22ch;
@@ -558,11 +575,16 @@ const concerns = [
   .concern__k {
     margin: 0 0 0.45rem;
     font-size: 1.05rem;
-    color: var(--mint);
+    color: var(--amber);
   }
   .concern__k::before {
     content: '↳ ';
-    color: var(--mint-dim);
+    color: rgba(230, 181, 103, 0.55);
+  }
+  .mission__foot a {
+    color: var(--amber);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
   .concern__d {
     margin: 0;
@@ -584,5 +606,9 @@ const concerns = [
   .vision__lead {
     max-width: 58ch;
     color: var(--cream-dim);
+  }
+  .vision__lead a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>
