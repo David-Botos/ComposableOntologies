@@ -101,12 +101,83 @@ const statusLabels = {
   path="/concept"
   description="Composable ontologies would unlock real value — but the tools for domain experts to build, share, compose, and execute their own ontologies don't exist yet. That gap is the project."
 >
+  <!-- ========================================================= WHO / WHY -->
+  <section class="who wrap">
+    <p class="who__kicker term"><span class="k">//</span> the project</p>
+    <h1 class="who__statement">
+      Open infrastructure for <em>composable ontologies</em> — owned by the
+      field, not sold as a product.
+    </h1>
+
+    <div class="who__manifesto">
+      <p>
+        I'm against vendor capture for a reason bigger than architecture. When
+        the substrate everyone builds on is owned by one company, the future
+        arrives on that company's terms — its roadmap, its price, its permission.
+      </p>
+      <p>
+        I want the other future: AI that genuinely enhances what people can do,
+        and hands that leverage to individuals — inside companies and outside
+        them — so they can point these tools at the goals that actually matter to
+        them, and build work and lives with more meaning in them.
+        <strong>Open infrastructure is how that future stays open to everyone —
+        not just whoever owns the platform.</strong>
+      </p>
+    </div>
+
+    <h2 class="who__label mono-label"><span class="who__labelK">//</span> who it's for</h2>
+    <ul class="who__parties">
+      {
+        [
+          {
+            n: '01',
+            accent: 'var(--blue)',
+            role: 'Companies & teams',
+            stake:
+              'Run on your own data as a durable asset — not a black box you rent and can’t inspect.',
+          },
+          {
+            n: '02',
+            accent: 'var(--amber)',
+            role: 'Operators & domain experts',
+            stake:
+              'Model your own world — the caseworker, clinician, or ops lead who actually knows it, not a data team guessing at it.',
+          },
+          {
+            n: '03',
+            accent: 'var(--mint)',
+            role: 'Ontologists & researchers',
+            stake:
+              'Carry the rigor of the field the last mile — into tooling people outside the lab actually ship.',
+          },
+          {
+            n: '04',
+            accent: 'var(--coral)',
+            role: 'Builders & engineers',
+            stake:
+              'Author, compose, and run ontologies as code — with agents that can finally help build them.',
+          },
+        ].map((p) => (
+          <li class="who__party" style={`--accent: ${p.accent};`}>
+            <span class="who__idx" aria-hidden="true">{p.n}</span>
+            <div class="who__body">
+              <h3 class="who__role">{p.role}</h3>
+              <p class="who__stake">{p.stake}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <hr class="rule" />
+
   <!-- ============================================================== HERO -->
   <section class="chero wrap">
-    <h1 class="chero__title">
+    <h2 class="chero__title">
       The problem is worth solving.<br />
       <span class="chero__accent">The tools to solve it don't exist yet.</span>
-    </h1>
+    </h2>
     <p class="chero__lead">
       A well-built domain graph unlocks reasoning, code, and support no flat
       pile of documents can. But no tools let a domain expert build one. Closing
@@ -331,6 +402,91 @@ const statusLabels = {
 </BaseLayout>
 
 <style>
+  /* --------------------------------------------------------- who / why */
+  .who {
+    padding-block: clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .who__kicker {
+    font-size: 0.8rem;
+    color: var(--mint);
+    margin: 0 0 1rem;
+  }
+  .who__statement {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    max-width: 24ch;
+    margin: 0 0 1.8rem;
+  }
+  .who__statement em {
+    font-style: normal;
+    color: var(--mint);
+  }
+  /* the belief / why — set off as the emotional core with a mint edge */
+  .who__manifesto {
+    max-width: 66ch;
+    border-left: 3px solid var(--mint-dim);
+    padding-left: clamp(1rem, 3vw, 1.6rem);
+    margin: 0 0 2.8rem;
+  }
+  .who__manifesto p {
+    color: var(--cream-dim);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    line-height: 1.6;
+    margin: 0 0 1rem;
+  }
+  .who__manifesto p:last-child {
+    margin-bottom: 0;
+  }
+  .who__manifesto strong {
+    color: var(--cream);
+  }
+  .who__label {
+    margin: 0 0 1.2rem;
+    color: var(--muted);
+  }
+  .who__labelK {
+    color: var(--mint);
+  }
+  .who__parties {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(0.8rem, 2vw, 1.1rem);
+  }
+  /* each constituency gets its own accent (--accent set inline) so the row
+     reads as four distinct stakeholders, not one undifferentiated list */
+  .who__party {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: clamp(1.1rem, 2.5vw, 1.4rem);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+  }
+  .who__idx {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    line-height: 1;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .who__role {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    color: var(--cream);
+  }
+  .who__stake {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--cream-dim);
+    max-width: 42ch;
+  }
+
   /* ---------------------------------------------------------------- hero */
   .chero {
     padding-block: clamp(3rem, 8vw, 5.5rem) clamp(1.5rem, 4vw, 2.5rem);
