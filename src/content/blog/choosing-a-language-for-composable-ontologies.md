@@ -211,9 +211,26 @@ What I'm confident about is narrower: the merge-vs-link distinction is real, and
 the convergence of unrelated fields on unification-based composition is a signal
 worth taking seriously. Everything above that is the current best guess.
 
+And here's the thing — the *mission* isn't even mine. Over a decade ago the
+Ontolog community named this exact problem and called it
+[OntoIOp](http://ontolog.cim3.net/wiki/OntoIOp.html), Ontology Integration and
+Interoperability. They even enumerated its four concerns: **heterogeneity**
+(domains that don't share one logic), **modularity** (reusing existing models
+instead of rebuilding), **links** (relating models that stay distinct), and
+**annotation** (describing the pieces and how they connect). That's the whole
+composable-ontologies problem, stated precisely, years before I ran into it.
+
+So the real question this piece is circling isn't "which language is best." It's
+this: **OntoIOp defined the mission rigorously and it largely stayed in the lab.
+What would it take to achieve the same four goals, but grounded in
+implementation — in the hands of the developers and organizations who'd
+actually use it?** The three-layer split is my current guess at the answer. It's
+a guess.
+
 So this is the ask, not a sign-off: if you've built ontology tooling, done
-entity resolution at scale, or spent time inside DOL, OTTR, or CUE and think the
-three-layer split breaks somewhere — I want to hear exactly where. This site is
-open infrastructure for composable ontologies, meant to be owned and
-pressure-tested by the people building in this direction, not a conclusion
-you're asked to nod along to. Come find where I'm wrong.
+entity resolution at scale, or spent time inside DOL, OTTR, CUE, or OntoIOp
+itself and think the three-layer split breaks somewhere — or that the whole
+framing is wrong — I want to hear exactly where. This site is open
+infrastructure for composable ontologies, meant to be owned and pressure-tested
+by the people building in this direction, not a conclusion you're asked to nod
+along to. Come find where I'm wrong.
