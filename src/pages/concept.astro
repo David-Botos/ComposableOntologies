@@ -45,6 +45,55 @@ const building = [
   },
 ];
 
+// The staged flow an org moves through to define and compose ontologies.
+// `status` is deliberately honest: grounded = backed by the research so far,
+// progress = partly explored, open = an unresolved question we're inviting
+// people to work on. This is a map still forming, not an arrived-at design.
+const stages = [
+  {
+    k: 'Model your domain',
+    d: 'Define the schema and constraints for one domain’s data — its shapes, its keys, what “valid” means inside that world.',
+    status: 'grounded',
+    note: 'What the research so far actually investigated.',
+    link: {
+      href: '/blog/choosing-a-language-for-composable-ontologies/',
+      label: 'Deep dive on stage 1: what language to define it in →',
+    },
+  },
+  {
+    k: 'Extract structured data into that model',
+    d: 'Turn raw sources — tickets, emails, commits — into instances of the schema, proposed and reviewed before they land.',
+    status: 'open',
+    note: 'Not yet researched in depth.',
+  },
+  {
+    k: 'Resolve within a domain',
+    d: 'Merge duplicate and overlapping records inside one ontology — the same entity, seen twice, collapsed into one node.',
+    status: 'grounded',
+    note: 'Pluggable deterministic-then-probabilistic entity resolution is a known pattern in the record-linkage field.',
+  },
+  {
+    k: 'Link across domains',
+    d: 'Typed relations between distinct ontologies that stay distinct — a support model referencing a contracts model without either dissolving into the other.',
+    status: 'open',
+    note: 'The least resolved stage — and closest to the problem OntoIOp / DOL spent over a decade on without reaching adoption-grade tooling.',
+    invite:
+      'If you’ve built cross-ontology linking — or watched it fail — this is the stage I most want challenged. Where does a typed link between two independently-owned models break first?',
+  },
+  {
+    k: 'Operate and grow the graph',
+    d: 'Humans and agents acting on the graph over time — proposing, reviewing, approving, pruning what no longer earns its place.',
+    status: 'progress',
+    note: 'Partially explored, mostly open.',
+  },
+];
+
+const statusLabels = {
+  grounded: 'grounded',
+  progress: 'in progress',
+  open: 'open question',
+};
+
 ---
 
 <BaseLayout
@@ -157,6 +206,63 @@ const building = [
         ))
       }
     </ol>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ============================================================= STAGES -->
+  <section class="section wrap">
+    <h2 class="sec__h">The path an organization takes — and where it’s still open.</h2>
+    <p class="lead stages__intro">
+      Here’s the flow from one domain’s model to a composed, living graph. It’s
+      not a finished architecture — some stages the research grounds, others are
+      open questions. The markers say which is which. Where a stage is open,
+      that’s an invitation, not a gap I’m hiding.
+    </p>
+
+    <div class="legend" aria-hidden="true">
+      <span class="legend__item"><span class="dot dot--grounded"></span>grounded</span>
+      <span class="legend__item"><span class="dot dot--progress"></span>in progress</span>
+      <span class="legend__item"><span class="dot dot--open"></span>open question</span>
+    </div>
+
+    <ol class="stages">
+      {
+        stages.map((s, i) => (
+          <li class={`stage stage--${s.status}`}>
+            <span class="stage__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div class="stage__body">
+              <div class="stage__head">
+                <h3 class="stage__k">{s.k}</h3>
+                <span class={`stage__status stage__status--${s.status}`}>
+                  <span class="dot" aria-hidden="true" />
+                  {statusLabels[s.status]}
+                </span>
+              </div>
+              <p class="stage__d">{s.d}</p>
+              <p class="stage__note">{s.note}</p>
+              {s.invite && (
+                <p class="stage__invite">
+                  <span class="term"><span class="k">//</span> your move</span>
+                  {' '}{s.invite}
+                </p>
+              )}
+              {s.link && (
+                <p class="stage__link">
+                  <a href={s.link.href}>{s.link.label}</a>
+                </p>
+              )}
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <p class="stages__foot">
+      This map is still forming. If a stage is mis-ordered, mis-labeled, or
+      missing — or you think two of them are really one — that’s exactly the kind
+      of pushback this is here to collect.
+    </p>
   </section>
 
   <hr class="rule" />
@@ -383,6 +489,171 @@ const building = [
     margin: 0;
     color: var(--muted);
     max-width: 62ch;
+  }
+
+  /* ------------------------------------------------------------- stages */
+  .stages__intro {
+    max-width: 64ch;
+    color: var(--cream-dim);
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 1.4rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .legend__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 999px;
+    flex: none;
+  }
+  .dot--grounded {
+    background: var(--mint);
+  }
+  .dot--progress {
+    background: var(--amber);
+  }
+  .dot--open {
+    background: var(--coral);
+  }
+
+  .stages {
+    list-style: none;
+    margin: 1.8rem 0 0;
+    padding: 0;
+    max-width: 80ch;
+  }
+  .stage {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1rem, 3vw, 1.8rem);
+    align-items: start;
+    padding: 1.5rem 0 1.5rem clamp(0.6rem, 2vw, 1rem);
+    border-top: 1px solid var(--line);
+    border-left: 2px solid transparent;
+  }
+  .stage:last-of-type {
+    border-bottom: 1px solid var(--line);
+  }
+  /* the left edge carries the status color so the honesty marker is
+     legible at a glance, before any label is read */
+  .stage--grounded {
+    border-left-color: var(--mint-dim);
+  }
+  .stage--progress {
+    border-left-color: rgba(230, 181, 103, 0.5);
+  }
+  .stage--open {
+    border-left-color: var(--coral);
+  }
+  .stage__n {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    line-height: 1;
+    color: var(--muted-2);
+    font-variant-numeric: tabular-nums;
+  }
+  .stage__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6rem 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .stage__k {
+    margin: 0;
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    color: var(--cream);
+  }
+  .stage__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.16em 0.65em;
+    white-space: nowrap;
+  }
+  .stage__status .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+  .stage__status--grounded {
+    color: var(--mint);
+    border-color: var(--mint-dim);
+  }
+  .stage__status--grounded .dot {
+    background: var(--mint);
+  }
+  .stage__status--progress {
+    color: var(--amber);
+    border-color: rgba(230, 181, 103, 0.4);
+  }
+  .stage__status--progress .dot {
+    background: var(--amber);
+  }
+  .stage__status--open {
+    color: var(--coral);
+    border-color: rgba(224, 122, 95, 0.5);
+  }
+  .stage__status--open .dot {
+    background: var(--coral);
+  }
+  .stage__d {
+    margin: 0;
+    color: var(--cream-dim);
+    max-width: 64ch;
+  }
+  .stage__note {
+    margin: 0.5rem 0 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+    max-width: 64ch;
+  }
+  .stage__invite {
+    margin: 0.9rem 0 0;
+    padding: 0.9rem 1rem;
+    border: 1px solid rgba(224, 122, 95, 0.35);
+    border-radius: var(--radius);
+    background: rgba(224, 122, 95, 0.06);
+    color: var(--cream-dim);
+    font-size: 0.92rem;
+    max-width: 64ch;
+  }
+  .stage__invite .term {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-right: 0.5rem;
+  }
+  .stage__invite .term .k {
+    color: var(--coral);
+  }
+  .stage__link {
+    margin: 0.9rem 0 0;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+  .stages__foot {
+    margin-top: 1.6rem;
+    color: var(--cream-dim);
+    font-size: 0.95rem;
+    max-width: 64ch;
   }
 
   /* ------------------------------------------------------- deterministic */
