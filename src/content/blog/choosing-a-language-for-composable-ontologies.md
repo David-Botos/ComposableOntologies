@@ -1,8 +1,8 @@
 ---
 title: 'What language should you define an ontology in?'
 description: >-
-  GODP/DOL reached furthest but stayed in its research community. OTTR gave up
-  power and traveled. CUE, from a different field, may fit the problem best.
+  GODP/DOL is the most powerful and rigorous. OTTR gave up scope and reached
+  more people. CUE, from a different field, may fit the problem best.
 pubDate: 2026-08-30
 kind: essay
 tags: ['ontologies', 'ontology-languages', 'composable-ontologies', 'entity-resolution']
@@ -12,7 +12,7 @@ newsletter: false
 <aside style="margin:0 0 2.4rem;border:1px solid var(--line);border-left:3px solid var(--mint);border-radius:var(--radius);background:var(--bg-panel);padding:1.2rem 1.4rem;">
   <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mint);margin-bottom:0.7rem;">TL;DR</div>
   <ul style="margin:0;padding-left:1.1rem;font-size:0.96rem;line-height:1.6;">
-    <li style="margin-bottom:0.5rem;">Two ontology-language lineages tried to solve this. <strong>GODP/DOL</strong> was the most expressive and built real tooling (Hets, the Ontohub repository), but stayed inside its research community; <strong>OTTR</strong> committed to one substrate, made composition cheap, and got picked up by strangers. In this field, <strong>expressive power and reach were inversely correlated.</strong></li>
+    <li style="margin-bottom:0.5rem;">Two ontology-language lineages tried to solve this. <strong>GODP/DOL</strong> is the most powerful and rigorous, with real tooling behind it (Hets, the Ontohub repository); <strong>OTTR</strong> narrowed scope, made composition cheap, and has reached more people outside its authors. So far, <strong>expressive power and reach have pulled in opposite directions</strong> — a fact about adoption, not about the quality of the ideas.</li>
     <li style="margin-bottom:0.5rem;"><strong>CUE</strong> — from config validation, a different field entirely — solves the same "many parties, partial constraints, no central authority" problem with unification. Unrelated fields <strong>converge on unification-based composition</strong>; that convergence is the real finding.</li>
     <li style="margin-bottom:0.5rem;"><strong>Merge vs. link</strong> are different operations — "same thing, dedup it" vs. "distinct things, typed edge between them" — and <strong>no single tool does both well.</strong></li>
     <li style="margin-bottom:0;">So the answer isn't one language, it's <strong>three layers</strong>: a schema/constraint layer (define), a graph as relational backbone (relate), and a separate agent/workflow layer (operate) — letting you pay only for the complexity your data demands. This is a <strong>hypothesis to pressure-test</strong>, not a shipped architecture.</li>
@@ -65,16 +65,17 @@ tooling verify the instantiation is sound. As a piece of engineering it solves
 the "safe reuse of an abstract structure" problem about as rigorously as anyone
 has.
 
-And it genuinely shipped infrastructure — this isn't vaporware. There's a
-running reference stack: the Hets analysis engine, and
+And it genuinely shipped infrastructure — this is serious, rigorous work, not
+vaporware. There's a running reference stack: the Hets analysis engine, and
 [Ontohub](https://github.com/ontohub/ontohub), a git-backed semantic repository
 that hosts heterogeneous ontologies and expresses their relationships *in* DOL,
-with real repositories published against it. What it never did was cross out of
-its originating research community. After all those years there's still no
-approachable primer for a working engineer, essentially one lineage of authors,
-and no independent reimplementation by people with no connection to the
-project. It built a home; not many outsiders moved in. That's the adoption
-signal, and it's a quiet one.
+with real repositories published against it. What's remained genuinely hard —
+and this is the open problem, not a criticism — is reach beyond the community
+that built it: there's still no approachable on-ramp for a working engineer, and
+the tooling has stayed largely within its originating research group. The
+distance between "rigorously defined and implemented" and "in an ordinary
+developer's hands" is exactly the gap this project cares about — and closing it
+is harder than the formal work, not easier.
 
 **OTTR** — Reasonable Ontology Templates, from the ISWC 2018 line of work — made
 the opposite bet. It committed to a single substrate (RDF/OWL), dropped the
@@ -87,10 +88,12 @@ by someone with no connection to the original Oslo authors. Less powerful. More
 real.
 
 The lesson worth stating plainly: **in this field, expressive power and reach
-were inversely correlated.** The lineage that tried to support everything built
-serious tooling but stayed inside its own research community. The one that
-committed to a single substrate and made composition cheap is the one strangers
-picked up and rebuilt. Both shipped; only one traveled.
+have so far pulled in opposite directions.** The lineage that took on the
+hardest version of the problem built the more powerful, more rigorous system;
+the one that narrowed scope and made composition cheap is the one that has
+spread further beyond its original authors. Both shipped real systems — the
+difference is how far each has reached so far, and that's a fact about adoption,
+not about the quality of the ideas.
 
 ## A third data point, from the wrong field
 
@@ -221,11 +224,12 @@ instead of rebuilding), **links** (relating models that stay distinct), and
 composable-ontologies problem, stated precisely, years before I ran into it.
 
 So the real question this piece is circling isn't "which language is best." It's
-this: **OntoIOp defined the mission rigorously and it largely stayed in the lab.
-What would it take to achieve the same four goals, but grounded in
-implementation — in the hands of the developers and organizations who'd
-actually use it?** The three-layer split is my current guess at the answer. It's
-a guess.
+this: **OntoIOp defined the mission rigorously and built real tooling for it.
+What would it take to carry those same four goals the last mile — into everyday
+implementation, in the hands of the developers and organizations who'd actually
+use it?** That last mile is its own hard problem, and the three-layer split is
+my current guess at part of the answer. It's a guess, offered in the same spirit
+their work was.
 
 So this is the ask, not a sign-off: if you've built ontology tooling, done
 entity resolution at scale, or spent time inside DOL, OTTR, CUE, or OntoIOp
