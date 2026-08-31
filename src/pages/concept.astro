@@ -159,6 +159,9 @@ const capabilities = [
   path="/concept"
   description="Composable ontologies would unlock real value — but the tools for domain experts to build, share, compose, and execute their own ontologies don't exist yet. That gap is the project."
 >
+  <!-- persistent way to act, once the reader is past the masthead's own CTA -->
+  <a href="#join" class="joinDock">Join ↓</a>
+
   <!-- ========================================================= WHO / WHY -->
   <section class="who wrap">
     <p class="who__kicker term"><span class="k">//</span> the project</p>
@@ -183,19 +186,24 @@ const capabilities = [
         arrives on that company's terms — its roadmap, its price, its permission.
       </p>
       <p>
-        I want the other future: AI that genuinely enhances what people can do,
-        and hands that leverage to individuals — inside companies and outside
-        them — so they can point these tools at the goals that actually matter to
-        them, and build work and lives with more meaning in them.
-        <strong>Open infrastructure is how that future stays open to everyone —
-        not just whoever owns the platform.</strong>
+        The other future is the one worth building together: AI that genuinely
+        enhances what people can do, and hands that leverage to individuals —
+        inside companies and outside them — so they can point these tools at the
+        goals that actually matter to them, and build work and lives with more
+        meaning in them. <strong>Open infrastructure is how we keep that future
+        open to everyone — not just whoever owns the platform.</strong>
       </p>
     </div>
 
     <p class="who__cta">
       <a href="#join" class="btn">Jump to how to help ↓</a>
     </p>
+  </section>
 
+  <hr class="rule" />
+
+  <!-- ===================================================== WHO IT'S FOR -->
+  <section class="section wrap">
     <h2 class="who__label mono-label"><span class="who__labelK">//</span> who it's for</h2>
     <ul class="who__parties">
       {
@@ -424,12 +432,12 @@ const capabilities = [
       Every buzzword you've been sold — grounded in your own data.
     </h2>
     <p class="lead poss__intro">
-      RAG, agents, a customer 360, decision intelligence, explainable AI — all of
-      it is being pitched to you right now. Here's the part the pitch skips: each
-      one only works when it's grounded in <strong>your organization's actual
-      model of its own world</strong>, not a vendor's generic one. Compose that
-      model yourself — on your terms, with your rules — and these stop being
-      slideware.
+      This is the payoff of everything above — model, compose, operate. RAG,
+      agents, a customer 360, decision intelligence, explainable AI are all being
+      pitched to you right now. Here's the part the pitch skips: each one only
+      works when it's grounded in <strong>your organization's actual model of its
+      own world</strong>, not a vendor's generic one. Compose that model
+      yourself — on your terms, with your rules — and these stop being slideware.
     </p>
 
     <ul class="poss__cloud">
@@ -521,6 +529,39 @@ const capabilities = [
   /* early exit for the reader already convinced at the top */
   .who__cta {
     margin: 0 0 2.6rem;
+  }
+
+  /* persistent Join affordance — fades in once the reader scrolls past the
+     masthead's own CTA, so acting is always one tap away on a long page */
+  .joinDock {
+    position: fixed;
+    right: clamp(1rem, 3vw, 2rem);
+    bottom: clamp(1rem, 3vw, 2rem);
+    z-index: 50;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.7em 1.15em;
+    border-radius: 999px;
+    background: var(--mint);
+    color: #0a1a0f;
+    box-shadow: 0 6px 22px rgba(0, 0, 0, 0.4);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      visibility 0.25s;
+  }
+  .joinDock:hover {
+    background: #a3f0b8;
+    text-decoration: none;
+  }
+  .joinDock.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
   /* the belief / why — framed with the blueprint corner-brackets (the site's
      own motif) rather than a side border, so it reads as a deliberate,
@@ -1114,3 +1155,14 @@ const capabilities = [
     font-size: 0.9rem;
   }
 </style>
+
+<script>
+  // Reveal the persistent Join affordance once the reader is past the
+  // masthead (so it doesn't compete with the masthead's own CTA).
+  const dock = document.querySelector('.joinDock');
+  if (dock) {
+    const onScroll = () => dock.classList.toggle('is-visible', window.scrollY > 700);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>
