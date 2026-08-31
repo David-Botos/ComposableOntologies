@@ -117,12 +117,10 @@ const parties = [
 // now; the point of the section is that each only works grounded in your own
 // model of your own world.
 const buzzwords = [
-  'RAG', 'GraphRAG', 'AI agents', 'agentic workflows', 'copilots',
-  'knowledge graphs', 'entity resolution', 'master data', 'customer 360',
-  'semantic search', 'vector search', 'decision intelligence', 'explainable AI',
-  'data provenance', 'auditability', 'data mesh', 'interoperability',
-  'digital twins', 'personalization', 'AI memory', 'context engineering',
-  'recommendation', 'process automation', 'trustworthy AI',
+  'RAG', 'GraphRAG', 'AI agents', 'knowledge graphs', 'entity resolution',
+  'customer 360', 'semantic search', 'decision intelligence', 'explainable AI',
+  'data provenance', 'digital twins', 'AI memory', 'personalization',
+  'interoperability',
 ];
 
 // The capabilities — depth. Each pairs the outcome with how composable
@@ -169,6 +167,14 @@ const capabilities = [
       field, not sold as a product.
     </h1>
 
+    <p class="who__define">
+      First, plainly: an <strong>ontology</strong> is a map of what matters in one
+      domain and how its pieces connect — a chef's map of a kitchen isn't a
+      surgeon's map of an OR. <strong>Composable</strong> means each domain keeps
+      its own map and defines how they join, instead of everyone being forced
+      onto one.
+    </p>
+
     <div class="who__manifesto bracket">
       <div class="bracket-corners"></div>
       <p>
@@ -185,6 +191,10 @@ const capabilities = [
         not just whoever owns the platform.</strong>
       </p>
     </div>
+
+    <p class="who__cta">
+      <a href="#join" class="btn">Jump to how to help ↓</a>
+    </p>
 
     <h2 class="who__label mono-label"><span class="who__labelK">//</span> who it's for</h2>
     <ul class="who__parties">
@@ -508,6 +518,19 @@ const capabilities = [
   .who__statement em {
     font-style: normal;
     color: var(--mint);
+  }
+  /* plain-language grounding before the term is leaned on */
+  .who__define {
+    max-width: 62ch;
+    margin: 0 0 1.8rem;
+    color: var(--cream-dim);
+  }
+  .who__define strong {
+    color: var(--mint);
+  }
+  /* early exit for the reader already convinced at the top */
+  .who__cta {
+    margin: 0 0 2.6rem;
   }
   /* the belief / why — framed with the blueprint corner-brackets (the site's
      own motif) rather than a side border, so it reads as a deliberate,
