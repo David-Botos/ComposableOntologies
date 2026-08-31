@@ -87,6 +87,35 @@ function absolutizeUrls(md) {
     .replace(/\b(href|src)="(\/(?!\/)[^"]*)"/g, (_, a, p) => `${a}="${SITE_URL}${p}"`);
 }
 
+// Design tokens (mirror of :root in src/styles/global.css). The post keeps
+// using var(--token) so it stays DRY with the design system on the website;
+// email clients drop CSS custom properties in inline styles, so we substitute
+// the literal values only in the generated email body.
+const TOKENS = {
+  '--mint': '#8fe6a4',
+  '--mint-dim': '#4f7d5f',
+  '--amber': '#e6b567',
+  '--coral': '#e07a5f',
+  '--blue': '#7ec7d8',
+  '--cream': '#f2ecda',
+  '--cream-dim': '#cbc6b6',
+  '--muted': '#8b897c',
+  '--muted-2': '#5f5e55',
+  '--bg': '#0c0d0c',
+  '--bg-panel': '#131513',
+  '--bg-panel-2': '#1a1c1a',
+  '--line': 'rgba(242,236,218,0.16)',
+  '--line-bright': 'rgba(242,236,218,0.34)',
+  '--radius': '4px',
+  '--mono': "'JetBrains Mono', ui-monospace, 'SF Mono', monospace",
+  '--sans': "'Inter', system-ui, -apple-system, sans-serif",
+};
+
+/** Inline var(--token) → literal so styles survive email clients. */
+function inlineTokens(md) {
+  return md.replace(/var\((--[a-z0-9-]+)\)/g, (m, name) => TOKENS[name] ?? m);
+}
+
 // ---- main -----------------------------------------------------------------
 loadEnv();
 
@@ -122,7 +151,7 @@ const subject = fmGet(fm, 'emailSubject') || title;
 const buttondownId = fmGet(fm, 'buttondownId');
 
 const emailBody =
-  absolutizeUrls(body.trim()) +
+  inlineTokens(absolutizeUrls(body.trim())) +
   `\n\n---\n\n[Read this on the web →](${SITE_URL}/blog/${slug}/)\n`;
 
 if (dryRun) {
