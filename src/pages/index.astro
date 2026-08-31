@@ -17,6 +17,29 @@ const unlocks = [
     d: 'Cross-domain data exchange and insights are a side effect of intelligent design.',
   },
 ];
+
+// OntoIOp's four concerns — the mission, named by the Ontolog community
+// (Michael Gruninger, 2011) long before this project. We restate them in plain
+// language; the point of the section is that our job is to make them practical,
+// not to claim the mission as new. See https://ontolog.cim3.net/wiki/OntoIOp.html
+const concerns = [
+  {
+    k: 'Heterogeneity',
+    d: 'Domains that don’t share one logic or one schema — and shouldn’t be forced to.',
+  },
+  {
+    k: 'Modularity',
+    d: 'Reuse existing models instead of rebuilding the world for every new domain.',
+  },
+  {
+    k: 'Links',
+    d: 'Relate models that stay distinct — typed connections, not a forced merge.',
+  },
+  {
+    k: 'Annotation',
+    d: 'Describe the pieces and how they connect, legibly, for people and machines.',
+  },
+];
 ---
 
 <BaseLayout path="/">
@@ -29,7 +52,8 @@ const unlocks = [
         Every domain is a<br /><span class="hero__accent">unique fingerprint.</span>
       </h1>
       <p class="hero__tension">
-        There is value in that nuance. Making that data
+        Support, engineering, contracts, strategy — each sees the world
+        differently, and there's value in that nuance. Making that data
         <span class="hl">interoperable</span> across domains and
         <span class="hl">interpretable</span> by people and machines — that's
         the problem.
@@ -148,14 +172,53 @@ const unlocks = [
 
   <hr class="rule" />
 
+  <!-- =========================================================== MISSION -->
+  <section class="section wrap mission">
+    <p class="mission__tag term"><span class="k">//</span> the mission has a name</p>
+    <h2 class="mission__title">
+      This problem was named a decade ago — in research, not in production.
+    </h2>
+    <p class="lead mission__lead">
+      The Ontolog community — academic and independent researchers — named this
+      exact problem years ago: <strong>OntoIOp</strong>, Ontology Integration and
+      Interoperability, with these four concerns defined rigorously and real
+      tooling built to explore them. That work is genuine, and it's where these
+      four come from. What it never became is something a working developer or
+      organization could pick up and run. That gap is the opening.
+    </p>
+
+    <ul class="concerns">
+      {
+        concerns.map((c) => (
+          <li class="concern">
+            <h3 class="concern__k">{c.k}</h3>
+            <p class="concern__d">{c.d}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mission__foot">
+      Our job is to carry these same four concerns out of the research world and
+      into production — into the hands of the developers and organizations who'd
+      actually use them.
+      <a href="https://ontolog.cim3.net/wiki/OntoIOp.html" target="_blank" rel="noopener noreferrer">
+        See OntoIOp's original framing →</a>
+    </p>
+  </section>
+
+  <hr class="rule" />
+
   <!-- ============================================================ VISION -->
   <section class="section wrap vision">
     <h2 class="vision__title">
       Infrastructure this fundamental shouldn't belong to one vendor.
     </h2>
     <p class="lead vision__lead">
-      It should be <strong>open infrastructure the community owns — not a
-      personal company</strong>. <a href="/concept">See how it works →</a>
+      It should be <strong>open infrastructure the whole field owns</strong> —
+      the companies that run on it, the operators and domain experts who shape
+      it, the ontologists and builders who extend it — <strong>not one vendor's
+      product to rent</strong>. <a href="/concept">See how it works →</a>
     </p>
   </section>
 
@@ -207,7 +270,7 @@ const unlocks = [
     color: var(--mint);
   }
   .hero__tension {
-    max-width: 34ch;
+    max-width: 46ch;
     margin: 0 0 1.3rem;
     font-size: clamp(1.25rem, 3vw, 1.85rem);
     line-height: 1.35;
@@ -409,6 +472,17 @@ const unlocks = [
     grid-template-columns: repeat(4, 1fr);
     gap: 0.6rem;
   }
+  /* phones: four silos at ~70px each is cramped — drop to a 2x2 so each
+     source stays legible */
+  @media (max-width: 560px) {
+    .silos__row {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+    .silo__label {
+      min-height: 0;
+    }
+  }
   .silo {
     display: flex;
     flex-direction: column;
@@ -463,6 +537,70 @@ const unlocks = [
     margin-top: 1.2rem;
   }
 
+  /* ------------------------------------------------------------ mission */
+  /* Amber is the section's own accent — this is the "prior work / research"
+     beat, held distinct from the mint that carries the forward/product claims,
+     so mint stops meaning "everything." */
+  .mission__tag {
+    font-size: 0.8rem;
+    color: var(--amber);
+    margin: 0 0 0.9rem;
+  }
+  .mission__tag .k {
+    color: var(--amber);
+  }
+  .mission__title {
+    max-width: 22ch;
+    font-size: clamp(1.7rem, 4.5vw, 2.7rem);
+  }
+  .mission__lead {
+    max-width: 60ch;
+    margin-top: 1.1rem;
+    color: var(--cream-dim);
+  }
+  /* 1px gap over a line-colored bg draws clean dividers no matter how many
+     columns wrap (4-up desktop → 2-up → 1-up), with no per-cell border math */
+  .concerns {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 1px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    gap: 1px;
+    background: var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .concern {
+    padding: clamp(1.1rem, 3vw, 1.5rem);
+    background: var(--bg-panel);
+  }
+  .concern__k {
+    margin: 0 0 0.45rem;
+    font-size: 1.05rem;
+    color: var(--amber);
+  }
+  .concern__k::before {
+    content: '↳ ';
+    color: rgba(230, 181, 103, 0.55);
+  }
+  .mission__foot a {
+    color: var(--amber);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .concern__d {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--cream-dim);
+    max-width: 40ch;
+  }
+  .mission__foot {
+    margin-top: 1.6rem;
+    max-width: 62ch;
+    color: var(--cream-dim);
+  }
+
   /* ------------------------------------------------------------- vision */
   .vision__title {
     max-width: 24ch;
@@ -471,5 +609,9 @@ const unlocks = [
   .vision__lead {
     max-width: 58ch;
     color: var(--cream-dim);
+  }
+  .vision__lead a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 </style>
