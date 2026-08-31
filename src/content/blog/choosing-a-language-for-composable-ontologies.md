@@ -10,9 +10,9 @@ newsletter: true
 buttondownId: 'em_178hsw5x9g82xtat20rqsjzvgs'
 ---
 
-<aside style="margin:0 0 2.4rem;border:1px solid var(--line);border-left:3px solid var(--mint);border-radius:var(--radius);background:var(--bg-panel);padding:1.2rem 1.4rem;">
-  <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mint);margin-bottom:0.7rem;">TL;DR</div>
-  <ul style="margin:0;padding-left:1.1rem;font-size:0.96rem;line-height:1.6;color:var(--cream-dim);">
+<aside style="margin:0 0 2.4rem;border:1px solid var(--mint);border-left:4px solid var(--mint);border-radius:var(--radius);padding:1.2rem 1.4rem;">
+  <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.7rem;">TL;DR</div>
+  <ul style="margin:0;padding-left:1.1rem;font-size:0.96rem;line-height:1.6;">
     <li style="margin-bottom:0.5rem;"><strong>GODP/DOL</strong> is the most powerful and rigorous, with real tooling behind it (Hets, the Ontohub repository); <strong>OTTR</strong> narrowed scope, made composition cheap, and reached more people. Expressive power and reach have pulled in opposite directions — a fact about adoption, not the ideas.</li>
     <li style="margin-bottom:0.5rem;"><strong>CUE</strong>, from config validation entirely, solves the same "many parties, partial constraints, no central authority" problem with unification. Unrelated fields <strong>converge on unification-based composition</strong> — that convergence is the real finding.</li>
     <li style="margin-bottom:0.5rem;"><strong>Merge vs. link</strong> are different operations — "same thing, dedup it" vs. "distinct things, typed edge" — and <strong>no single tool does both well.</strong></li>
@@ -98,15 +98,15 @@ systems. Two things can relate in two fundamentally different ways, and
 conflating them is where designs break:
 
 <figure style="margin:1.8rem 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:1rem;">
-  <div style="border:1px solid var(--mint-dim);border-radius:var(--radius);background:var(--bg-panel);padding:1.2rem;">
-    <div style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mint);margin-bottom:0.7rem;">Merge</div>
-    <div style="font-family:var(--mono);font-size:1.1rem;color:var(--cream);line-height:1.5;">A&nbsp;●&nbsp;&nbsp;&nbsp;B&nbsp;●&nbsp;&nbsp;→&nbsp;&nbsp;<span style="color:var(--mint);">●</span></div>
-    <p style="margin:0.7rem 0 0;font-size:0.9rem;color:var(--cream-dim);">Same thing, one node. Entity resolution / dedup. <strong style="color:var(--cream);">Unification fits.</strong></p>
+  <div style="border:1px solid var(--mint);border-left:4px solid var(--mint);border-radius:var(--radius);padding:1.2rem;">
+    <div style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.7rem;">Merge</div>
+    <div style="font-family:var(--mono);font-size:1.1rem;line-height:1.5;">A&nbsp;●&nbsp;&nbsp;&nbsp;B&nbsp;●&nbsp;&nbsp;→&nbsp;&nbsp;●</div>
+    <p style="margin:0.7rem 0 0;font-size:0.9rem;">Same thing, one node. Entity resolution / dedup. <strong>Unification fits.</strong></p>
   </div>
-  <div style="border:1px solid var(--line);border-radius:var(--radius);background:var(--bg-panel);padding:1.2rem;">
-    <div style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:0.7rem;">Link</div>
-    <div style="font-family:var(--mono);font-size:1.1rem;color:var(--cream);line-height:1.5;">A&nbsp;●&nbsp;<span style="color:var(--blue);">—closes→</span>&nbsp;B&nbsp;●</div>
-    <p style="margin:0.7rem 0 0;font-size:0.9rem;color:var(--cream-dim);">Distinct things, typed edge. Stay separate. <strong style="color:var(--cream);">Wants a graph.</strong></p>
+  <div style="border:1px solid var(--blue);border-left:4px solid var(--blue);border-radius:var(--radius);padding:1.2rem;">
+    <div style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.7rem;">Link</div>
+    <div style="font-family:var(--mono);font-size:1.1rem;line-height:1.5;">A&nbsp;●&nbsp;—closes→&nbsp;B&nbsp;●</div>
+    <p style="margin:0.7rem 0 0;font-size:0.9rem;">Distinct things, typed edge. Stay separate. <strong>Wants a graph.</strong></p>
   </div>
 </figure>
 
@@ -125,17 +125,17 @@ Stop hunting for the one language. Split the system into three layers, each doin
 the single thing it's good at:
 
 <figure style="margin:1.8rem 0;display:grid;gap:0.5rem;">
-  <div style="border:1px solid var(--mint-dim);border-left:3px solid var(--mint);border-radius:var(--radius);background:var(--bg-panel);padding:1rem 1.2rem;">
-    <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mint);">Layer 1 · Define</div>
-    <div style="color:var(--cream);margin-top:0.2rem;">Schema / constraint layer — each domain's shapes, composed by <em>unifying</em> constraints.</div>
+  <div style="border:1px solid var(--mint);border-left:4px solid var(--mint);border-radius:var(--radius);padding:1rem 1.2rem;">
+    <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;">Layer 1 · Define</div>
+    <div style="margin-top:0.2rem;">Schema / constraint layer — each domain's shapes, composed by <em>unifying</em> constraints.</div>
   </div>
-  <div style="border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:var(--radius);background:var(--bg-panel);padding:1rem 1.2rem;">
-    <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);">Layer 2 · Relate</div>
-    <div style="color:var(--cream);margin-top:0.2rem;">Graph as relational backbone — typed cross-domain <em>links</em>, validated against layer 1, never merged into it.</div>
+  <div style="border:1px solid var(--blue);border-left:4px solid var(--blue);border-radius:var(--radius);padding:1rem 1.2rem;">
+    <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;">Layer 2 · Relate</div>
+    <div style="margin-top:0.2rem;">Graph as relational backbone — typed cross-domain <em>links</em>, validated against layer 1, never merged into it.</div>
   </div>
-  <div style="border:1px solid rgba(230,181,103,0.4);border-left:3px solid var(--amber);border-radius:var(--radius);background:var(--bg-panel);padding:1rem 1.2rem;">
-    <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);">Layer 3 · Operate</div>
-    <div style="color:var(--cream);margin-top:0.2rem;">Agent / workflow layer — extraction, orchestration, and the rules that grow the graph. Reads and writes the graph; doesn't define what's valid.</div>
+  <div style="border:1px solid var(--amber);border-left:4px solid var(--amber);border-radius:var(--radius);padding:1rem 1.2rem;">
+    <div style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;">Layer 3 · Operate</div>
+    <div style="margin-top:0.2rem;">Agent / workflow layer — extraction, orchestration, and the rules that grow the graph. Reads and writes the graph; doesn't define what's valid.</div>
   </div>
 </figure>
 
