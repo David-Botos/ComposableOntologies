@@ -9,9 +9,10 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
     <div class="join__head">
       <h2>Help build this in the open.</h2>
       <p class="join__mission">
-        I'm calling on <strong>builders, ontologists, and anyone serious about
-        impactful AI</strong>. This thesis only becomes real with your
-        experience and judgment. If that's you — this is the ground floor.
+        I'm calling on <strong>builders, ontologists, operators and domain
+        experts, and the companies betting on AI that actually works</strong>.
+        This thesis only becomes real with your experience and judgment. If
+        that's you — this is the ground floor.
       </p>
       <a
         class="btn btn--primary join__headCta"
@@ -33,9 +34,11 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
           <p class="muted join__cardBody">
             Where people building this infrastructure gather. Lurk, argue, or ship.
           </p>
-          <a class={`btn ${compact ? 'btn--primary' : ''}`} href={LINKS.xCommunity} target="_blank" rel="noopener">
-            Join the X community →
-          </a>
+          {compact && (
+            <a class="btn btn--primary" href={LINKS.xCommunity} target="_blank" rel="noopener">
+              Join the X community →
+            </a>
+          )}
         </>
       ) : (
         <>
@@ -46,9 +49,13 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
             once there are enough of us.
           </p>
           <div class="join__follow">
-            <a class={`btn ${compact ? 'btn--primary' : ''}`} href={LINKS.xProfile} target="_blank" rel="noopener">
-              Follow on X →
-            </a>
+            {/* On full pages the head CTA already carries "follow"; only show
+                the card's X button on the compact variant, which hides the head. */}
+            {compact && (
+              <a class="btn btn--primary" href={LINKS.xProfile} target="_blank" rel="noopener">
+                Follow on X →
+              </a>
+            )}
             <a class="btn" href={LINKS.linkedin} target="_blank" rel="noopener">
               Connect on LinkedIn →
             </a>
@@ -79,8 +86,11 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
           autocomplete="email"
           required
         />
-        <button type="submit" class="btn btn--amber">Subscribe →</button>
+        <button type="submit" class="btn">Subscribe →</button>
       </form>
+      <p class="sub__status" role="status" aria-live="polite" hidden>
+        Thanks — check your inbox to confirm your subscription.
+      </p>
       <p class="sub__fine muted">No spam. One email a month. Unsubscribe anytime.</p>
     </div>
   </div>
@@ -157,8 +167,13 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
     color: var(--muted-2);
   }
   .sub input:focus-visible {
-    border-color: var(--amber);
+    border-color: var(--mint);
     outline: none;
+  }
+  .sub__status {
+    margin: 0.6rem 0 0;
+    font-size: 0.8rem;
+    color: var(--mint);
   }
   .sub__fine {
     font-size: 0.75rem;
@@ -190,3 +205,15 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
     }
   }
 </style>
+
+<script>
+  // The newsletter form posts to Buttondown in a new tab; reveal an on-page
+  // confirmation so the funnel endpoint gives visible feedback instead of a
+  // silent submit.
+  document.querySelectorAll('.sub').forEach((form) => {
+    form.addEventListener('submit', () => {
+      const status = form.parentElement?.querySelector('.sub__status');
+      if (status) status.hidden = false;
+    });
+  });
+</script>
