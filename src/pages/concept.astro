@@ -202,26 +202,6 @@ const capabilities = [
 
   <hr class="rule" />
 
-  <!-- ===================================================== WHO IT'S FOR -->
-  <section class="section wrap">
-    <h2 class="who__label mono-label"><span class="who__labelK">//</span> who it's for</h2>
-    <ul class="who__parties">
-      {
-        parties.map((p) => (
-          <li class="who__party" style={`--accent: ${p.accent};`}>
-            <span class="who__idx" aria-hidden="true">{p.n}</span>
-            <div class="who__body">
-              <h3 class="who__role">{p.role}</h3>
-              <p class="who__stake">{p.stake}</p>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <hr class="rule" />
-
   <!-- ============================================================== HERO -->
   <section class="chero wrap">
     <h2 class="chero__title">
@@ -239,7 +219,7 @@ const capabilities = [
 
   <!-- ========================================================= WHY / TOGETHER -->
   <section class="section wrap why">
-    <p class="why__kicker term"><span class="k">//</span> why it can't be built alone</p>
+    <p class="why__kicker term"><span class="k">//</span> who it's for — and why it needs them</p>
     <h2 class="why__title">
       The same reason it's composable is the reason I can't build it alone.
     </h2>
@@ -250,22 +230,27 @@ const capabilities = [
       ontologies exist <em>because</em> no one perspective captures every domain.
       So the project has to be built the way the architecture works: many
       experts, each owning the corner they know, composed. Building it alone
-      would contradict its own thesis.
+      would contradict its own thesis. Here's who that means — and what each has
+      at stake.
     </p>
 
-    <ol class="why__list">
+    <ul class="who__parties">
       {
         parties.map((p) => (
-          <li class="why__item" style={`--accent: ${p.accent};`}>
-            <span class="why__n" aria-hidden="true">{p.n}</span>
-            <div class="why__body">
-              <h3 class="why__role">{p.role}</h3>
-              <p class="why__text">{p.why}</p>
+          <li class="who__party" style={`--accent: ${p.accent};`}>
+            <span class="who__idx" aria-hidden="true">{p.n}</span>
+            <div class="who__body">
+              <h3 class="who__role">{p.role}</h3>
+              <p class="who__stake">{p.stake}</p>
+              <p class="who__why">
+                <span class="who__whyLabel">why it needs you</span>
+                {p.why}
+              </p>
             </div>
           </li>
         ))
       }
-    </ol>
+    </ul>
   </section>
 
   <hr class="rule" />
@@ -585,13 +570,6 @@ const capabilities = [
   .who__manifesto strong {
     color: var(--cream);
   }
-  .who__label {
-    margin: 0 0 1.2rem;
-    color: var(--muted);
-  }
-  .who__labelK {
-    color: var(--mint);
-  }
   .who__parties {
     list-style: none;
     margin: 0;
@@ -632,10 +610,9 @@ const capabilities = [
     max-width: 42ch;
   }
 
-  /* ------------------------------------------------------- why / together */
-  /* numbered rows echo the who-it's-for accents (same number + colour per
-     group) but as a list, not a second card grid — variety over repetition,
-     and the accent stays on the numeral, never a side border */
+  /* ---------------------------------------- who it's for + why it needs them */
+  /* one merged section: the not-alone thesis, then one card per party
+     carrying both what they get (stake) and why they're needed (why) */
   .why__kicker {
     font-size: 0.8rem;
     color: var(--mint);
@@ -646,47 +623,30 @@ const capabilities = [
   }
   .why__intro {
     max-width: 66ch;
-    margin-top: 1.2rem;
+    margin: 1.2rem 0 2rem;
     color: var(--cream-dim);
   }
   .why__intro em {
     font-style: normal;
     color: var(--mint);
   }
-  .why__list {
-    list-style: none;
-    margin: 2rem 0 0;
-    padding: 0;
-    max-width: 80ch;
-  }
-  .why__item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: clamp(1rem, 3vw, 1.6rem);
-    align-items: baseline;
-    padding: 1.4rem 0;
+  /* the "why you're needed" line, set off inside each party card */
+  .who__why {
+    margin: 0.75rem 0 0;
+    padding-top: 0.75rem;
     border-top: 1px solid var(--line);
-  }
-  .why__item:last-child {
-    border-bottom: 1px solid var(--line);
-  }
-  .why__n {
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: clamp(1.3rem, 3.5vw, 1.9rem);
-    line-height: 1;
-    color: var(--accent);
-    font-variant-numeric: tabular-nums;
-  }
-  .why__role {
-    margin: 0 0 0.3rem;
-    font-size: 1.05rem;
-    color: var(--cream);
-  }
-  .why__text {
-    margin: 0;
+    font-size: 0.88rem;
     color: var(--cream-dim);
-    max-width: 60ch;
+    max-width: 42ch;
+  }
+  .who__whyLabel {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
 
   /* ------------------------------------------------------ what's possible */
