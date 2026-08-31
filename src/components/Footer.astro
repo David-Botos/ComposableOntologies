@@ -1,5 +1,5 @@
 ---
-import { SITE, LINKS } from '../config';
+import { SITE, LINKS, HAS_DISCORD } from '../config';
 const year = new Date().getFullYear();
 ---
 
@@ -17,6 +17,9 @@ const year = new Date().getFullYear();
       <a href="/blog">Digest</a>
       <a href="/about">About</a>
       <a href="/rss.xml">RSS</a>
+      {HAS_DISCORD && (
+        <a href={LINKS.discord} target="_blank" rel="noopener">Discord</a>
+      )}
       <a href={LINKS.xProfile} target="_blank" rel="me noopener">X</a>
       <a href={LINKS.linkedin} target="_blank" rel="me noopener">LinkedIn</a>
     </nav>

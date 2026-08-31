@@ -1,5 +1,5 @@
 ---
-import { LINKS, HAS_X_COMMUNITY } from '../config';
+import { LINKS, HAS_X_COMMUNITY, HAS_DISCORD } from '../config';
 const { compact = false } = Astro.props;
 const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LINKS.buttondownUsername}`;
 ---
@@ -15,11 +15,15 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
       </p>
       <a
         class="btn btn--primary join__headCta"
-        href={HAS_X_COMMUNITY ? LINKS.xCommunity : LINKS.xProfile}
+        href={HAS_DISCORD ? LINKS.discord : HAS_X_COMMUNITY ? LINKS.xCommunity : LINKS.xProfile}
         target="_blank"
         rel="noopener"
       >
-        {HAS_X_COMMUNITY ? 'Join the community →' : 'Follow the build →'}
+        {HAS_DISCORD
+          ? 'Join the Discord →'
+          : HAS_X_COMMUNITY
+            ? 'Join the community →'
+            : 'Follow the build →'}
       </a>
     </div>
   )}
@@ -27,7 +31,27 @@ const buttondownAction = `https://buttondown.com/api/emails/embed-subscribe/${LI
   <div class="join__grid">
     <!-- Follow / community -->
     <div class="stackbox join__card">
-      {HAS_X_COMMUNITY ? (
+      {HAS_DISCORD ? (
+        <>
+          <h3 class="join__cardTitle">Join the Discord</h3>
+          <p class="muted join__cardBody">
+            Where builders, ontologists, and operators gather. Lurk, argue, or ship.
+          </p>
+          <div class="join__follow">
+            {/* On full pages the head CTA already carries "Join the Discord";
+                only show the card's Discord button on the compact variant,
+                which hides the head. */}
+            {compact && (
+              <a class="btn btn--primary" href={LINKS.discord} target="_blank" rel="noopener">
+                Join the Discord →
+              </a>
+            )}
+            <a class="btn" href={LINKS.linkedin} target="_blank" rel="noopener">
+              Connect on LinkedIn →
+            </a>
+          </div>
+        </>
+      ) : HAS_X_COMMUNITY ? (
         <>
           <h3 class="join__cardTitle">Join the group on X</h3>
           <p class="muted join__cardBody">
