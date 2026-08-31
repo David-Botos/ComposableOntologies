@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GraphCanvas from '../components/GraphCanvas.astro';
 import JoinBlock from '../components/JoinBlock.astro';
+import { LINKS, HAS_DISCORD } from '../config';
 
 const unlocks = [
   {
@@ -62,7 +63,11 @@ const concerns = [
         it possible.
       </p>
       <div class="hero__cta">
-        <a href="#join" class="btn btn--primary">Join the community →</a>
+        {HAS_DISCORD ? (
+          <a href={LINKS.discord} target="_blank" rel="noopener" class="btn btn--primary">Join the Discord →</a>
+        ) : (
+          <a href="#join" class="btn btn--primary">Join the community →</a>
+        )}
         <a href="/concept" class="btn">Read the concept</a>
       </div>
     </div>

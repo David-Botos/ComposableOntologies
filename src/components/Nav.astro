@@ -1,8 +1,16 @@
 ---
-import { SITE } from '../config';
+import { SITE, LINKS, HAS_DISCORD } from '../config';
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href);
+// The persistent CTA is the primary, low-stakes entry point. When the Discord
+// exists it names it and links straight in; otherwise it scrolls to #join.
+const joinHref = HAS_DISCORD ? LINKS.discord : '/#join';
+const joinLabel = HAS_DISCORD ? 'Join the Discord →' : 'Join →';
+// The mobile nav shares its row with the wordmark + menu toggle, so the CTA
+// there uses a shorter label to avoid overflowing narrow screens.
+const joinLabelShort = HAS_DISCORD ? 'Discord →' : 'Join →';
+const joinExternal = HAS_DISCORD;
 const items = [
   { href: '/', label: 'Home' },
   { href: '/concept', label: 'The Concept' },
@@ -27,12 +35,20 @@ const items = [
           </a>
         ))
       }
-      <a href="/#join" class="btn btn--primary nav__cta">Join →</a>
+      <a
+        href={joinHref}
+        class="btn btn--primary nav__cta"
+        {...(joinExternal ? { target: '_blank', rel: 'noopener' } : {})}
+      >{joinLabel}</a>
     </nav>
 
     <!-- mobile nav -->
     <div class="nav__mobile">
-      <a href="/#join" class="btn btn--primary nav__cta">Join →</a>
+      <a
+        href={joinHref}
+        class="btn btn--primary nav__cta"
+        {...(joinExternal ? { target: '_blank', rel: 'noopener' } : {})}
+      >{joinLabelShort}</a>
       <details class="nav__disc">
         <summary class="nav__toggle" aria-label="Menu">
           <svg class="nav__ico nav__ico--bars" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
@@ -117,6 +133,7 @@ const items = [
     padding: 0.55em 0.95em;
     min-height: 38px;
     font-size: 0.82rem;
+    white-space: nowrap;
   }
 
   /* mobile menu, hidden on desktop */
@@ -151,6 +168,11 @@ const items = [
   }
   .nav__disc[open] .nav__ico--x {
     display: block;
+  }
+  /* When the menu is closed it must take no space, or its min-width can push
+     the page into horizontal scroll on the narrowest phones. */
+  .nav__disc:not([open]) .nav__panel {
+    display: none;
   }
   .nav__panel {
     position: absolute;
@@ -187,6 +209,46 @@ const items = [
     }
     .nav__mobile {
       display: flex;
+    }
+  }
+
+  /* Narrow phones: the wordmark, the "Discord →" CTA, and the menu toggle
+     must share one row. Tighten type and spacing so nothing overflows and
+     forces page-wide horizontal scroll. */
+  @media (max-width: 430px) {
+    .nav__inner {
+      gap: 0.5rem;
+    }
+    .nav__name {
+      font-size: 0.82rem;
+    }
+    .nav__mobile {
+      gap: 0.45rem;
+    }
+    .nav__cta {
+      padding: 0.5em 0.7em;
+      font-size: 0.76rem;
+    }
+    .nav__toggle {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Smallest phones (SE, older Android): trim a little further. */
+  @media (max-width: 360px) {
+    .nav__inner {
+      gap: 0.4rem;
+    }
+    .nav__mobile {
+      gap: 0.35rem;
+    }
+    .nav__name {
+      font-size: 0.72rem;
+    }
+    .nav__cta {
+      padding: 0.5em 0.58em;
+      font-size: 0.72rem;
     }
   }
 </style>

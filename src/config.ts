@@ -21,6 +21,10 @@ export const LINKS = {
   xProfile: 'https://x.com/dmbotos',
   linkedin: 'https://www.linkedin.com/in/david-botos/',
 
+  // The Discord community — the real gathering place. Shown wherever
+  // HAS_DISCORD is true (nav, join block, footer).
+  discord: 'https://discord.gg/62XFjSREg',
+
   // Future: an X Community invite URL. Unused until HAS_X_COMMUNITY is true.
   xCommunity: 'https://x.com/i/communities/1943167428258428948',
 
@@ -32,6 +36,9 @@ export const LINKS = {
 
 /** Flip to true once an X Community exists to show a "Join the community" CTA. */
 export const HAS_X_COMMUNITY = false;
+
+/** The Discord community is live — it's the primary "join" destination. */
+export const HAS_DISCORD = true;
 
 /** Whether to show the yellow "config me" banners in dev. */
 export const SHOW_SETUP_HINTS = true;
