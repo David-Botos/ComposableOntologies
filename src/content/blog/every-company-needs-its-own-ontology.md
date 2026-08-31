@@ -42,10 +42,19 @@ to surface were buried under a landfill of cheap extraction debris.
 
 The instinct is to blame the prompt. Write a better filter. Use a smarter
 model. That instinct is wrong. The failure was **architectural**: one
-undifferentiated schema was forcing support tickets, code changes, and strategy
-into the same shape, and a single queue had to serve all of them. But
-high-stakes strategic judgment and high-volume entity typing have completely
-different economics. Jamming them into one pipe broke both.
+undifferentiated schema forced support tickets, code changes, and strategy into
+the same shape, and a single queue had to serve all of them. High-stakes
+strategic judgment and high-volume entity typing have completely different
+economics; jamming them into one pipe broke both.
+
+But even the schema was only the symptom. The deeper mistake was that I'd
+dictated the whole model myself — one generalist guessing at domains I don't
+live in. A good ontology carries nuance only the daily specialist knows: which
+records are the same, when a ticket links to a PR, what workflows grow the
+graph, how agents should read and write it. That's more than one person can
+hold — and there was no tooling to let each specialist own their piece, or to
+test-drive the agent side the way you'd test any other code. **Authorship and
+tooling, not schema shape, is what actually broke.**
 
 ## Why one schema can never be enough
 
@@ -106,8 +115,8 @@ it reuses the plumbing that already works.
 
 You could build all of this as a closed product. Plenty of startups will. But
 infrastructure this foundational — the format for defining an ontology, the
-harness for extracting into it, the layer for gluing domains together —
-shouldn't belong to one vendor. It's the substrate the entire company-brain
+harness for extracting into it, the way to test how agents read and write it,
+the layer for gluing domains together — shouldn't belong to one vendor. It's the substrate the entire company-brain
 wave is going to be built on, and substrates are public goods.
 
 That's what I want to build: **open-source infrastructure for composable
