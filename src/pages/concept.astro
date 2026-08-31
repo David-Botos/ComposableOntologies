@@ -132,6 +132,47 @@ const parties = [
   },
 ];
 
+// The buzzword cloud — breadth. Every term people are being sold in AI right
+// now; the point of the section is that each only works grounded in your own
+// model of your own world.
+const buzzwords = [
+  'RAG', 'GraphRAG', 'AI agents', 'agentic workflows', 'copilots',
+  'knowledge graphs', 'entity resolution', 'master data', 'customer 360',
+  'semantic search', 'vector search', 'decision intelligence', 'explainable AI',
+  'data provenance', 'auditability', 'data mesh', 'interoperability',
+  'digital twins', 'personalization', 'AI memory', 'context engineering',
+  'recommendation', 'process automation', 'trustworthy AI',
+];
+
+// The capabilities — depth. Each pairs the outcome with how composable
+// ontologies make it real on the org's own terms.
+const capabilities = [
+  {
+    k: 'Grounded answers, not hallucinations',
+    d: 'LLMs respond from your resolved graph — every claim traceable to a real source in your data, not a confident guess.',
+  },
+  {
+    k: 'Agents that know your business',
+    d: 'They act with your domain’s real context and rules in hand, not a generic prompt that flattens what makes you you.',
+  },
+  {
+    k: 'One resolved view of everything',
+    d: 'The same customer, patient, or asset matched across every system — on the matching rules you set, not a vendor’s defaults.',
+  },
+  {
+    k: 'Decisions with the whole chain',
+    d: 'Who wanted what, what it traded against, what it touched — reasoning across domains, not another dashboard.',
+  },
+  {
+    k: 'Provenance and compliance by construction',
+    d: 'Every node source-cited and human-gated. When someone asks you to show your work, the graph already has.',
+  },
+  {
+    k: 'Interoperable without a rewrite',
+    d: 'Compose domains that stay distinct instead of collapsing them into one schema — your models keep their nuance and still connect.',
+  },
+];
+
 ---
 
 <BaseLayout
@@ -211,6 +252,46 @@ const parties = [
         ))
       }
     </ol>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ======================================================= WHAT'S POSSIBLE -->
+  <section class="section wrap poss">
+    <p class="poss__kicker term"><span class="k">//</span> what it makes possible</p>
+    <h2 class="poss__title">
+      Every buzzword you've been sold — grounded in your own data.
+    </h2>
+    <p class="lead poss__intro">
+      RAG, agents, a customer 360, decision intelligence, explainable AI — all of
+      it is being pitched to you right now. Here's the part the pitch skips: each
+      one only works when it's grounded in <strong>your organization's actual
+      model of its own world</strong>, not a vendor's generic one. Compose that
+      model yourself — on your terms, with your rules — and these stop being
+      slideware.
+    </p>
+
+    <ul class="poss__cloud">
+      {buzzwords.map((b) => <li class="tag poss__chip">{b}</li>)}
+    </ul>
+
+    <ul class="poss__grid">
+      {
+        capabilities.map((c) => (
+          <li class="poss__cell">
+            <h3 class="poss__k">{c.k}</h3>
+            <p class="poss__d">{c.d}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="poss__personal">
+      <span class="term"><span class="k">//</span> and not only at work&nbsp;&nbsp;</span>
+      The same substrate is how personal AI finally works for a <em>person</em>:
+      your own domains — health, finances, projects, the people you know — modeled
+      your way and composed into a brain you own, not one you rent.
+    </p>
   </section>
 
   <hr class="rule" />
@@ -584,6 +665,84 @@ const parties = [
     margin: 0;
     color: var(--cream-dim);
     max-width: 60ch;
+  }
+
+  /* ------------------------------------------------------ what's possible */
+  .poss__kicker {
+    font-size: 0.8rem;
+    color: var(--mint);
+    margin: 0 0 1rem;
+  }
+  .poss__title {
+    max-width: 24ch;
+  }
+  .poss__intro {
+    max-width: 64ch;
+    margin-top: 1.2rem;
+    color: var(--cream-dim);
+  }
+  /* buzzword cloud — breadth: hit the terms people are searching for */
+  .poss__cloud {
+    list-style: none;
+    margin: 1.8rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .poss__chip {
+    color: var(--cream-dim);
+  }
+  /* capability grid — depth: 1px-gap dividers frame it as one panel, distinct
+     from the who cards and the why list */
+  .poss__grid {
+    list-style: none;
+    margin: 2rem 0 0;
+    padding: 1px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1px;
+    background: var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .poss__cell {
+    background: var(--bg-panel);
+    padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  }
+  .poss__k {
+    margin: 0 0 0.5rem;
+    font-size: 1.02rem;
+    color: var(--cream);
+    line-height: 1.3;
+  }
+  .poss__k::before {
+    content: '→ ';
+    color: var(--mint);
+  }
+  .poss__d {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--cream-dim);
+    max-width: 46ch;
+  }
+  .poss__personal {
+    margin: 2rem 0 0;
+    max-width: 66ch;
+    color: var(--cream-dim);
+    border-top: 1px solid var(--line);
+    padding-top: 1.4rem;
+  }
+  .poss__personal .term {
+    color: var(--amber);
+    font-size: 0.8rem;
+  }
+  .poss__personal .term .k {
+    color: var(--amber);
+  }
+  .poss__personal em {
+    font-style: normal;
+    color: var(--mint);
   }
 
   /* ---------------------------------------------------------------- hero */
