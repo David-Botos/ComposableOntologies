@@ -132,6 +132,12 @@ const concerns = [
           support ticket and an architecture decision don't belong in the same
           shape.
         </p>
+        <p class="muted prob__cause">
+          The deeper failure is authorship: no one person knows every domain's
+          nuances — its entity-resolution rules, its workflows, how agents should
+          read and write it — or has the tooling to let each domain's own
+          specialist define and test that. It's too much for one generalist.
+        </p>
       </div>
 
       <div class="silos" aria-label="Four data silos feeding one broken strategy layer">
@@ -456,6 +462,10 @@ const concerns = [
   }
   .prob__text p {
     max-width: 48ch;
+  }
+  .prob__cause {
+    margin-top: 1rem;
+    font-size: 0.95rem;
   }
   .coral {
     color: var(--coral);

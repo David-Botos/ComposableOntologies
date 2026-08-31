@@ -8,6 +8,8 @@ const gaps = [
   'No tooling to knit two ontologies together.',
   'Ontologies aren’t code, so agents can’t help build them.',
   'No way to run an ontology-as-code to constrain LLM extraction into valid graph additions.',
+  'No way to test-drive how agents read and write against a model — no TDD loop for the ontology, the way you’d demand for any other code.',
+  'No way for a domain’s own specialist to define its entity-resolution rules and workflows without a central data team in the loop.',
   'No tooling for agents to prune context — to drop what no longer earns its place.',
 ];
 
@@ -226,10 +228,13 @@ const capabilities = [
     <p class="lead why__intro">
       No single person has the expertise to model every domain — support,
       clinical, legal, civic, and ops each demand someone who actually lives in
-      it. That's not a hiring gap; it's the whole premise: the project has to be
-      built the way the architecture works — many experts, each owning the corner
-      they know, <em>composed</em>. Building it alone would contradict its own
-      thesis. Here's who that means, and what each has at stake.
+      it. And it's more than the schema: each domain's entity-resolution rules,
+      its growth workflows, and how agents read and write against it carry nuance
+      only the daily specialist knows — and the tooling to let them define all
+      that, and test it the way you'd test any other code, barely exists. That's
+      not a hiring gap; it's the whole premise: the project has to be built the
+      way the architecture works — many experts, each owning the corner they
+      know, <em>composed</em>. Here's who that means, and what each has at stake.
     </p>
 
     <ul class="who__parties">

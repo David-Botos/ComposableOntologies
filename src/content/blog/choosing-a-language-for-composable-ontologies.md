@@ -6,7 +6,8 @@ description: >-
 pubDate: 2026-08-30
 kind: essay
 tags: ['ontologies', 'ontology-languages', 'composable-ontologies', 'entity-resolution']
-newsletter: false
+newsletter: true
+buttondownId: 'em_178hsw5x9g82xtat20rqsjzvgs'
 ---
 
 <aside style="margin:0 0 2.4rem;border:1px solid var(--line);border-left:3px solid var(--mint);border-radius:var(--radius);background:var(--bg-panel);padding:1.2rem 1.4rem;">
@@ -28,19 +29,32 @@ domains where the pieces live.
 
 You can't fix this by asking people to link everything by hand. At any real
 scale, the number of connections between tickets, commits, contracts, and
-conversations explodes faster than anyone can maintain them. That — not "graphs
-are elegant" — is the honest justification for a knowledge-graph approach: the
-linking has to be modeled and partly automated, because humans can't hold it in
-their heads.
+conversations explodes faster than anyone can maintain them. So the honest case
+for a knowledge graph isn't that graphs are elegant — it's that the linking has
+to be modeled and partly automated, because no one can hold it all in their
+head.
 
 But here's the reframe that took me a collapsed system to learn: the goal is
-**not one schema for the whole company.** It's letting each department own the
-model of its own domain, and only *then* asking how those models connect. I
-have the wreckage to prove the alternative fails. I built a single-schema
-company graph — 16,879 nodes on production data — and when I audited its review
-queue, **88% of it was noise**: raw, unclassifiable fragments crowding out the
-handful of real decisions the system existed to surface. One shape, forced onto
-support and code and strategy at once, broke under its own generality.
+**not one schema dictated top-down** — handed down by the C-suite or a central
+data team that's never done the work. It's the reverse: let the people who
+actually live in each domain, ontology experts or not, model their own corner of
+the world in a form they can read and reason about. Each department owns the
+model of its own domain, and only *then* do you ask how those models connect. Anyone
+who's tried the alternative knows how it fails: force support, code, and
+strategy into one shared schema and it collapses under its own generality — the
+handful of decisions that matter drown in noise. Plenty of teams have lived some
+version of that.
+
+But the schema is only the symptom. A good ontology is more nuance than one
+generalist can hold and more work than one person can do. Each domain has its own
+entity-resolution rules and its own workflows for growing the graph — which
+records are the same thing, when a ticket should link to a PR, what counts as a
+match — and only the specialist who works with that data every day actually knows
+them. One person dictating from the top can't carry that for every domain at
+once. And there's no tooling today that lets each specialist define their own
+model and workflows, or lets you test-drive how agents read and write against
+them the way you'd test-drive any other code. *That* gap — authorship and
+tooling, not schema shape — is the thing to solve.
 
 So the interesting question isn't "should we model our domains." It's the one I
 kept dodging: **what do you actually write an ontology definition in?** This
@@ -199,8 +213,11 @@ your own data forces it. This isn't a novel risk at the resolution layer; it's
 already proven ground. Libraries like [Splink](https://github.com/moj-analytical-services/splink)
 and [Dedupe](https://github.com/dedupeio/dedupe) are pluggable, incremental
 entity-resolution pipelines running at real scale today. You stand on that
-literature; you don't reinvent it. It's TDD for ontology-building: start with
-the simplest thing that passes, harden where reality pushes back.
+literature; you don't reinvent it. And the same test-first discipline should
+extend to the agent layer — define the model, then develop how agents read and
+write against it the way you'd develop any other code: write the check, watch it
+fail, make it pass, harden where reality pushes. That's the part almost no
+tooling supports yet, and it's a lot of what this project is about.
 
 ## This is a hypothesis, not a conclusion
 
