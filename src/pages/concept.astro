@@ -214,6 +214,21 @@ const capabilities = [
 
   <hr class="rule" />
 
+  <!-- ============================================================== HERO -->
+  <section class="chero wrap">
+    <h2 class="chero__title">
+      The problem is worth solving.<br />
+      <span class="chero__accent">The tools to solve it don't exist yet.</span>
+    </h2>
+    <p class="chero__lead">
+      A well-built domain graph unlocks reasoning, code, and support no flat
+      pile of documents can. But no tools let a domain expert build one. Closing
+      that gap is the project.
+    </p>
+  </section>
+
+  <hr class="rule" />
+
   <!-- ========================================================= WHY / TOGETHER -->
   <section class="section wrap why">
     <p class="why__kicker term"><span class="k">//</span> why it can't be built alone</p>
@@ -243,71 +258,6 @@ const capabilities = [
         ))
       }
     </ol>
-  </section>
-
-  <hr class="rule" />
-
-  <!-- ======================================================= WHAT'S POSSIBLE -->
-  <section class="section wrap poss">
-    <p class="poss__kicker term"><span class="k">//</span> what it makes possible</p>
-    <h2 class="poss__title">
-      Every buzzword you've been sold — grounded in your own data.
-    </h2>
-    <p class="lead poss__intro">
-      RAG, agents, a customer 360, decision intelligence, explainable AI — all of
-      it is being pitched to you right now. Here's the part the pitch skips: each
-      one only works when it's grounded in <strong>your organization's actual
-      model of its own world</strong>, not a vendor's generic one. Compose that
-      model yourself — on your terms, with your rules — and these stop being
-      slideware.
-    </p>
-
-    <ul class="poss__cloud">
-      {buzzwords.map((b) => <li class="tag poss__chip">{b}</li>)}
-    </ul>
-
-    <ul class="poss__grid">
-      {
-        capabilities.map((c) => (
-          <li class="poss__cell">
-            <h3 class="poss__k">{c.k}</h3>
-            <p class="poss__d">{c.d}</p>
-          </li>
-        ))
-      }
-    </ul>
-
-    <div class="proof">
-      <p class="proof__tag term"><span class="k">//</span> not hypothetical</p>
-      <p class="proof__body">
-        For one client I generated a bespoke interface from their code, meetings,
-        emails, and tickets — the graph surfacing the right context at the right
-        time. Nobody designed that page. It was assembled from the substrate, for
-        that client, once.
-      </p>
-    </div>
-
-    <p class="poss__personal">
-      <span class="term"><span class="k">//</span> and not only at work&nbsp;&nbsp;</span>
-      The same substrate is how personal AI finally works for a <em>person</em>:
-      your own domains — health, finances, projects, the people you know — modeled
-      your way and composed into a brain you own, not one you rent.
-    </p>
-  </section>
-
-  <hr class="rule" />
-
-  <!-- ============================================================== HERO -->
-  <section class="chero wrap">
-    <h2 class="chero__title">
-      The problem is worth solving.<br />
-      <span class="chero__accent">The tools to solve it don't exist yet.</span>
-    </h2>
-    <p class="chero__lead">
-      A well-built domain graph unlocks reasoning, code, and support no flat
-      pile of documents can. But no tools let a domain expert build one. Closing
-      that gap is the project.
-    </p>
   </section>
 
   <hr class="rule" />
@@ -463,6 +413,46 @@ const capabilities = [
         </p>
       </div>
     </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- ======================================================= WHAT'S POSSIBLE -->
+  <section class="section wrap poss">
+    <p class="poss__kicker term"><span class="k">//</span> what it makes possible</p>
+    <h2 class="poss__title">
+      Every buzzword you've been sold — grounded in your own data.
+    </h2>
+    <p class="lead poss__intro">
+      RAG, agents, a customer 360, decision intelligence, explainable AI — all of
+      it is being pitched to you right now. Here's the part the pitch skips: each
+      one only works when it's grounded in <strong>your organization's actual
+      model of its own world</strong>, not a vendor's generic one. Compose that
+      model yourself — on your terms, with your rules — and these stop being
+      slideware.
+    </p>
+
+    <ul class="poss__cloud">
+      {buzzwords.map((b) => <li class="tag poss__chip">{b}</li>)}
+    </ul>
+
+    <ul class="poss__grid">
+      {
+        capabilities.map((c) => (
+          <li class="poss__cell">
+            <h3 class="poss__k">{c.k}</h3>
+            <p class="poss__d">{c.d}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="poss__personal">
+      <span class="term"><span class="k">//</span> and not only at work&nbsp;&nbsp;</span>
+      The same substrate is how personal AI finally works for a <em>person</em>:
+      your own domains — health, finances, projects, the people you know — modeled
+      your way and composed into a brain you own, not one you rent.
+    </p>
   </section>
 
   <hr class="rule" />
@@ -856,12 +846,25 @@ const capabilities = [
     border-bottom: 1px solid var(--line);
   }
   .pillar__n {
+    position: relative;
     font-family: var(--mono);
     font-weight: 700;
     font-size: clamp(1.6rem, 4vw, 2.4rem);
     line-height: 1;
     color: var(--mint);
     font-variant-numeric: tabular-nums;
+  }
+  /* connect the three pillars into a flow — "each one making the next
+     possible" — so this list reads as a sequence, not another numbered list */
+  .pillar:not(:last-child) .pillar__n::after {
+    content: '↓';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1.15rem;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--mint-dim);
   }
   .pillar__k {
     margin: 0 0 0.5rem;
