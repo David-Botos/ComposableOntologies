@@ -657,6 +657,9 @@ const capabilities = [
   }
   .poss__chip {
     color: var(--cream-dim);
+    /* keep the real casing — GraphRAG, RAG, AI agents — not .tag's uppercase */
+    text-transform: none;
+    letter-spacing: 0.02em;
   }
   /* capability grid — depth: 1px-gap dividers frame it as one panel, distinct
      from the who cards and the why list */
